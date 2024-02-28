@@ -28,18 +28,53 @@
 
 
 .button
+  position: relative
   display: flex
   align-items: center
   justify-content: center
-  font-weight: 700
-  padding: 10px 100px
-  min-height: 54px
-  color: $white
+  font-weight: 500
+  padding: 14px 32px
+  min-height: 42px
   transition: $transition
   line-height: 1
   width: fit-content
-  font-size: 20px
-  border-radius: 22px
+  font-size: 14px
+  border-radius: 32px
+  user-select: none
+  overflow: hidden
+  &__text
+    position: relative
+    z-index: 1
+  &__hover
+    position: absolute
+    width: 100%
+    height: 100%
+    left: 0
+    top: 0
+    transition: $transition
+    border-radius: 32px
+    transform: translateX(-100%)
+
+  &.button--fill
+    background-color: $creme
+    color: $black
+    &:hover
+      color: $creme
+    &:hover .button__hover
+      transform: translateX(0)
+      background-color: #A2998E
+
+  &.button--outline
+    background-color: transparent
+    color: #FFFFFF
+    border: 1px solid currentColor
+    &:hover
+      color: #24231F
+      border-color: #FFFFFF
+    &:hover .button__hover
+      transform: translateX(0)
+      background-color: #FFFFFF
+
 
 
 .scroll-margin
