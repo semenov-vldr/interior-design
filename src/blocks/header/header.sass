@@ -19,7 +19,6 @@
     flex: 0 0 56px
 
   &-nav
-    width: 100%
     @media (max-width: 900px)
       top: 0
       left: 0
@@ -52,13 +51,17 @@
         flex-direction: column
 
     &__item
-      white-space: nowrap
-      font-size: 14px
-      font-weight: 500
       @media (max-width: 900px)
         border-bottom: 1px solid currentColor
         width: 100%
         padding-bottom: 16px
+
+    &__link
+      white-space: nowrap
+      font-size: 14px
+      font-weight: 500
+      transition: $transition
+      @media (max-width: 900px)
         font-size: 20px
         font-weight: 400
 
