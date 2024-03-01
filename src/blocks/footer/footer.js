@@ -1,7 +1,6 @@
 // Scroll Footer
 
 function margin() {
-  const main = document.querySelector("main");
   const footer = document.querySelector(".footer");
   document.body.style.marginBottom = footer.offsetHeight + "px";
 
