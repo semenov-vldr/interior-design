@@ -98,7 +98,6 @@ phoneInputs.forEach(function (input) {
 // Scroll Footer
 
 function margin() {
-  var main = document.querySelector("main");
   var footer = document.querySelector(".footer");
   document.body.style.marginBottom = footer.offsetHeight + "px";
 
