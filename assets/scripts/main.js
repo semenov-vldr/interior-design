@@ -100,7 +100,7 @@ phoneInputs.forEach(function (input) {
 function margin() {
   var main = document.querySelector("main");
   var footer = document.querySelector(".footer");
-  main.style.marginBottom = footer.offsetHeight + "px";
+  document.body.style.marginBottom = footer.offsetHeight + "px";
 
   // const hero = document.querySelector(".hero");
   // const guarantees = document.querySelector(".guarantees");
@@ -156,6 +156,9 @@ function mobileNav() {
     nav.classList.toggle("js-mobile-nav-open");
     document.querySelector('html').classList.toggle('js-no-scroll');
   });
+  window.onscroll = function () {
+    header.classList.toggle('js-scroll', window.scrollY > 1);
+  };
 }
 mobileNav();
 "use strict";
