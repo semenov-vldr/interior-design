@@ -8,8 +8,13 @@ function mobileNav () {
   burger.addEventListener("click", () => {
     nav.classList.toggle("js-mobile-nav-open");
     document.querySelector('html').classList.toggle('js-no-scroll');
-
   });
+
+  window.onscroll = function () {
+    header.classList.toggle('js-scroll', window.scrollY > 1);
+  }
+
 }
 
 mobileNav() ;
+

@@ -20,18 +20,18 @@ footer.footer
 
 
     .footer__container.container
-        address.footer__contacts
-            a(href='mailto: zab_design@mail.ru') Zab_design@mail.ru
-            a(href='tel:+790163600666') +7 (901) 636-00-66
-        nav.footer__nav
-            a(href='##') Главная
-            a(href='##') Обо мне
-            a(href='##') Услуги
-            a(href='##') Портфолио
-            a(href='##') Этапы работы
-            a(href='##') Гарантии
-            a(href='##') Faq
-        img.footer__logo(src='./assets/img/icons/dark-logo.svg', alt='logo')
+        //address.footer__contacts
+        a.footer__contacts.footer__contacts--email(href='mailto: zab_design@mail.ru') Zab_design@mail.ru
+        a.footer__contacts.footer__contacts--tel(href='tel:+790163600666') +7 (901) 636-00-66
+        //nav.footer__nav
+        //    a(href='##') Главная
+        //    a(href='##') Обо мне
+        //    a(href='##') Услуги
+        //    a(href='##') Портфолио
+        //    a(href='##') Этапы работы
+        //    a(href='##') Гарантии
+        //    a(href='##') Faq
+        include ../../img/icons/logo-dark.svg
         p.footer__footnote *Instagram — проект Meta Platforms Inc., <br> деятельность которой в России запрещена
         .footer__policy
             span ©2024
@@ -39,8 +39,8 @@ footer.footer
             a(href='##', download) Политика обработки персональных данных
         .footer__authors
             div
-                | Designed by
+                | Designed by &nbsp;
                 a(href='##') @str8zh1
             div
-                | Development by
+                | Development by &nbsp;
                 a(href='##') @sinceresv

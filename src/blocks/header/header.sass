@@ -5,7 +5,13 @@
   display: flex
   align-items: center
   padding: 16px 0
-  z-index: 1
+  z-index: 3
+  transition: 0.7s
+  @media (max-width: 900px)
+    min-height: 56px
+    padding: 10px 0
+  &.js-scroll
+    background-color: $bg
 
   &__container
     display: flex
@@ -13,10 +19,37 @@
     justify-content: space-between
     width: 100%
     gap: 32px
-    z-index: 1
+    z-index: 3
 
   &__logo
-    flex: 0 0 56px
+    transition: $transition
+    flex: 0 0 64px
+    display: flex
+    align-items: center
+    @media (max-width: 900px)
+      flex: 0 0 56px
+
+  &__logo svg
+    width: 64px
+    height: 64px
+    transition: $transition
+    @media (max-width: 900px)
+      width: 56px
+      height: 56px
+
+
+  &__logo svg .text
+    animation: 10000ms spin
+    animation-fill-mode: backwards
+    transform-origin: center center
+
+  @keyframes spin
+    from
+      transform: rotate(0deg)
+    to
+      transform: rotate(360deg)
+
+
 
   &-nav
     @media (max-width: 900px)
@@ -64,6 +97,8 @@
       @media (max-width: 900px)
         font-size: 20px
         font-weight: 400
+      &:hover
+        color: #E8B685
 
 
   &__burger
