@@ -6,7 +6,7 @@
     grid-gap: 40px 72px
     justify-content: space-between
     @media (max-width: $width-mobile)
-      grid-gap: 32px
+      grid-gap: 32px 16px
 
   &__title
     margin-bottom: 0
@@ -62,4 +62,10 @@
         display: none
       &--mobile
         display: block
+    p
+      color: rgba(#fff, 0.5)
+      transition: 0.7s
+    p.scroll-text
+      color: $white
+
 

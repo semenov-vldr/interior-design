@@ -7,7 +7,6 @@
   color: #44423D
   padding: 32px 0
   width: 100%
-  //min-height: calc(100vh - 100px)
   @media (max-width: $width-mobile)
     padding: 24px 0 12px
 
@@ -22,7 +21,6 @@
         margin-bottom: 24px
       @media (max-width: $width-mobile)
         margin-bottom: 16px
-
 
     &__list
       position: relative
@@ -45,7 +43,6 @@
         @media (max-width: $width-tablet)
           width: 330px
         @media (max-width: $width-mobile)
-          //width: 280px
           width: 160px
       &::after
         content: ""
@@ -57,8 +54,13 @@
         top: 0
         left: 0
         border-radius: 12px
+        transition: $transition
+      &:hover::after
+        background-color: rgba(#000, 0.25)
+
 
     &__marquee
+      pointer-events: none
       overflow-x: hidden
       user-select: none
       position: absolute
@@ -83,21 +85,6 @@
       100%
         transform: translateX(-50%)
 
-
-  // ---Footer---
-  //&__container
-  //  font-size: 14px
-  //  display: grid
-  //  grid-template-columns: 1fr auto 1fr
-  //  grid-template-areas: "contacts nav logo" "footnote nav logo" "policy authors ."
-  //  grid-gap: 56px
-  //  line-height: 1
-  //  @media (max-width: $width-mobile)
-  //    grid-gap: 32px
-  //    grid-template-columns: auto auto
-  //    grid-template-areas: "contacts contacts" "nav logo" "footnote footnote" "authors authors" "policy policy"
-
-
   &__container
     font-size: 14px
     display: grid
@@ -120,28 +107,6 @@
       &:hover
         color: #C67E38
 
-  //&__contacts
-  //  width: fit-content
-  //  grid-area: contacts
-  //  font-size: 20px
-  //  display: flex
-  //  flex-direction: column
-  //  gap: 32px
-  //  @media (max-width: $width-mobile)
-  //    font-size: 16px
-  //    gap: 24px
-
-  //&__nav
-  //  grid-area: nav
-  //  display: flex
-  //  flex-direction: column
-  //  gap: 32px
-  //  font-size: 20px
-  //  @media (max-width: $width-mobile)
-  //    font-size: 16px
-  //    gap: 24px
-
-
   &__contacts
     width: fit-content
     font-size: 20px
@@ -156,7 +121,6 @@
       justify-self: right
       @media (max-width: 1100px)
         justify-self: center
-
 
   &__logo
     grid-area: logo
@@ -205,4 +169,3 @@
       align-self: auto
     @media (max-width: $width-mobile)
       gap: 8px
-
