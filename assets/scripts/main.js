@@ -95,6 +95,30 @@ phoneInputs.forEach(function (input) {
 });
 "use strict";
 
+var about = document.getElementById("about");
+if (about) {
+  var scrollText = function scrollText(aboutTextBlock) {
+    var options = {
+      threshold: 1,
+      rootMargin: '100px 0px -40% 0px'
+    };
+    var pList = aboutTextBlock.querySelectorAll("p");
+    function handlerScrollText(entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle('scroll-text', entry.isIntersecting);
+      });
+    }
+    ;
+    var observer = new IntersectionObserver(handlerScrollText, options);
+    pList.forEach(function (p) {
+      return observer.observe(p);
+    });
+  };
+  var aboutTextList = about.querySelectorAll(".about__text");
+  aboutTextList.forEach(scrollText);
+}
+"use strict";
+
 // Scroll Footer
 
 function margin() {
