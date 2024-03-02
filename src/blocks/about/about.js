@@ -9,7 +9,7 @@ if (about) {
   function scrollText (aboutTextBlock) {
     const options = {
       threshold: 1,
-      rootMargin: '100px 0px -40% 0px',
+      rootMargin: '100px 0px -50% 0px',
     };
 
     const pList = aboutTextBlock.querySelectorAll("p");

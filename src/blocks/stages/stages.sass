@@ -1,0 +1,56 @@
+.stages
+
+  &__title
+    margin-bottom: 180px
+    @media (max-width: $width-tablet)
+      margin-bottom: 120px
+    @media (max-width: $width-mobile)
+      margin-bottom: 56px
+
+
+  &__body
+    padding: 50px 0 120px
+    display: grid
+    @media (min-width: $width-mobile)
+      grid-template-columns: 1.4fr 1.6fr
+      grid-gap: 40px
+      justify-content: space-between
+
+  &__list
+    display: flex
+    flex-direction: column
+    gap: 144px
+
+  &__item
+    color: rgba(#fff, 0.5)
+    font-weight: 500
+    @include fontSize(24, 32)
+    transition: 0.7s
+    user-select: none
+    &.js-stages-scroll
+      color: $white
+
+
+  &__image-wrapper
+    position: sticky
+    top: 200px
+    height: fit-content
+    width: 100%
+    //box-shadow:
+    @media (max-width: $width-mobile)
+      top: initial
+      right: 0
+      bottom: 50px
+    img
+      display: block
+      width: 100%
+      object-fit: cover
+      height: 470px
+      border-radius: 6px
+      @media (max-width: $width-tablet)
+        height: 400px
+      @media (max-width: $width-mobile)
+        width: 60%
+        height: auto
+        aspect-ratio: 1 / 1
+        margin-left: auto
