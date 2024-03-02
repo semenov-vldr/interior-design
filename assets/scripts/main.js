@@ -100,7 +100,7 @@ if (about) {
   var scrollText = function scrollText(aboutTextBlock) {
     var options = {
       threshold: 1,
-      rootMargin: '100px 0px -40% 0px'
+      rootMargin: '100px 0px -50% 0px'
     };
     var pList = aboutTextBlock.querySelectorAll("p");
     function handlerScrollText(entries) {
@@ -197,3 +197,24 @@ function hideLoader() {
 if (loader) window.addEventListener('load', hideLoader);
 "use strict";
 "use strict";
+"use strict";
+
+var stages = document.getElementById("stages");
+if (stages) {
+  var scrollStages = function scrollStages(stagesItem) {
+    var options = {
+      threshold: 1,
+      rootMargin: '100px 0px -50% 0px'
+    };
+    function handlerScrollText(entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle('js-stages-scroll', entry.isIntersecting);
+      });
+    }
+    ;
+    var observer = new IntersectionObserver(handlerScrollText, options);
+    observer.observe(stagesItem);
+  };
+  var stagesList = stages.querySelectorAll(".stages__item");
+  stagesList.forEach(scrollStages);
+}
