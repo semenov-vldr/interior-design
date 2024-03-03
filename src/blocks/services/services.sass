@@ -1,0 +1,77 @@
+.services
+
+  &__container
+    display: flex
+    justify-content: space-between
+    gap: 64px
+    @media (max-width: $width-tablet)
+      flex-direction: column
+      gap: 0
+
+  .types
+    display: grid
+    grid-template-columns: auto auto
+    gap: 20px
+    @media (max-width: $width-mobile)
+      display: flex
+      overflow: auto
+      gap: 16px
+      margin-right: -16px
+
+    & > .button
+      grid-column: 1 / -1
+      margin: 32px auto 0
+      @media (max-width: $width-mobile)
+        display: none
+
+    &-item
+      background-color: $black
+      padding: 32px
+      border-radius: 6px
+      width: 100%
+      @media (max-width: $width-mobile)
+        min-width: 350px
+        border-radius: 8px
+        padding: 16px
+        font-size: 15px
+      @media (max-width: 480px)
+        min-width: 300px
+        height: fit-content
+      &:first-child
+        grid-column: 1 / -1
+        .types-item__list
+          grid-template-columns: repeat(3, auto)
+          @media (max-width: $width-tablet)
+            grid-template-columns: repeat(2, auto)
+            justify-content: left
+          @media (max-width: $width-mobile)
+            grid-template-columns: 1fr
+      &:nth-child(2)
+        .types-item__list
+          grid-template-columns: repeat(2, auto)
+          @media (max-width: $width-tablet)
+            grid-template-columns: 1fr
+      &:nth-child(3)
+        @media (max-width: $width-mobile)
+          margin-right: 16px
+
+      &__title
+        margin-bottom: 24px
+
+      &__list
+        display: grid
+        grid-gap: 8px 16px
+        justify-content: space-between
+      &__item
+        list-style-type: disc
+        margin-left: 24px
+
+
+      .button
+        display: none
+        @media (max-width: $width-mobile)
+          display: block
+          margin-top: 20px
+          width: 100%
+
+

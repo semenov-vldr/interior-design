@@ -5,8 +5,10 @@
   left: 0
   background-color: $creme
   color: #44423D
-  padding: 32px 0
+  padding: 80px 0 32px
   width: 100%
+  @media (max-width: $width-tablet)
+    padding: 40px 0 32px
   @media (max-width: $width-mobile)
     padding: 24px 0 12px
 
@@ -21,6 +23,8 @@
         margin-bottom: 24px
       @media (max-width: $width-mobile)
         margin-bottom: 16px
+      @media (max-width: 360px)
+        font-size: 16px
 
     &__list
       position: relative
@@ -41,11 +45,13 @@
         object-fit: cover
         border-radius: 12px
         @media (max-width: $width-tablet)
-          width: 330px
+          width: 300px
         @media (max-width: $width-mobile)
           width: 160px
         @media (max-width: 400px)
           width: 140px
+        @media (max-width: 360px)
+          width: 100px
       &::after
         content: ""
         position: absolute
@@ -103,6 +109,8 @@
     @media (max-width: $width-mobile)
       grid-gap: 24px
       font-size: 12px
+    @media (max-width: 360px)
+      grid-gap: 16px
 
     a
       transition: $transition
@@ -133,6 +141,8 @@
       max-width: 110px
     @media (max-width: 400px)
       max-width: 100px
+    @media (max-width: 360px)
+      max-width: 60px
 
     .text
       animation: 10000ms spin
