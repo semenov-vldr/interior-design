@@ -201,20 +201,32 @@ if (loader) window.addEventListener('load', hideLoader);
 
 var stages = document.getElementById("stages");
 if (stages) {
-  var scrollStages = function scrollStages(stagesItem) {
+  var scrollStages = function scrollStages(stageItem) {
     var options = {
       threshold: 1,
-      rootMargin: '100px 0px -50% 0px'
+      rootMargin: '-30% 0px -35% 0px'
     };
-    function handlerScrollText(entries) {
+    function handlerScrollStages(entries) {
       entries.forEach(function (entry) {
         entry.target.classList.toggle('js-stages-scroll', entry.isIntersecting);
+        var dataStage = +stageItem.dataset.stage;
+        var stageIndex = dataStage - 1;
+        if (stageItem.classList.contains('js-stages-scroll')) {
+          stagesImages.forEach(function (img) {
+            return img.classList.remove('js-stages-scroll');
+          });
+          stagesImages[stageIndex].classList.remove('js-abroad');
+          stagesImages[stageIndex].classList.add('js-stages-scroll');
+        } else {
+          stagesImages[stageIndex].classList.add('js-abroad');
+        }
       });
     }
     ;
-    var observer = new IntersectionObserver(handlerScrollText, options);
-    observer.observe(stagesItem);
+    var observer = new IntersectionObserver(handlerScrollStages, options);
+    observer.observe(stageItem);
   };
   var stagesList = stages.querySelectorAll(".stages__item");
+  var stagesImages = stages.querySelectorAll(".stages__image-wrapper img");
   stagesList.forEach(scrollStages);
 }
