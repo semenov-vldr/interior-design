@@ -119,6 +119,20 @@ if (about) {
 }
 "use strict";
 
+var faq = document.getElementById("faq");
+if (faq) {
+  var accordionItems = faq.querySelectorAll('.faq__item'); // список элементов аккордиона
+  var toggleClass = function toggleClass(item) {
+    return item.classList.toggle('js-faq-active');
+  };
+  accordionItems.forEach(function (accordionItem) {
+    accordionItem.addEventListener('click', function () {
+      return toggleClass(accordionItem);
+    });
+  });
+}
+"use strict";
+
 // Scroll Footer
 
 function margin() {
@@ -204,7 +218,7 @@ if (stages) {
   var scrollStages = function scrollStages(stageItem) {
     var options = {
       threshold: 1,
-      rootMargin: '-30% 0px -35% 0px'
+      rootMargin: '-25% 0px -35% 0px'
     };
     function handlerScrollStages(entries) {
       entries.forEach(function (entry) {
