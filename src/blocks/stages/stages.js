@@ -11,7 +11,7 @@ if (stages) {
 
     const options = {
       threshold: 1,
-      rootMargin: '-30% 0px -35% 0px',
+      rootMargin: '-25% 0px -35% 0px',
     };
 
     function handlerScrollStages (entries) {
@@ -32,7 +32,7 @@ if (stages) {
       });
     };
 
-    const observer = new IntersectionObserver(handlerScrollStages, options)
+    const observer = new IntersectionObserver(handlerScrollStages, options);
     observer.observe(stageItem);
   }
 
