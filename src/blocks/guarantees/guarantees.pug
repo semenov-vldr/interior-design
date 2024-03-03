@@ -1,25 +1,19 @@
 section.guarantees#guarantees
     .guarantees__container.container
-        h2.title-section Гарантии
 
-        .guarantees__list
-            article.guarantees__item.guarantees-item.guarantees-item--first
-                h3.guarantees-item__title Проект как на картинке
-                p.guarantees-item__desc Каждый проект будет выполнен в точности согласно представленному визуальному образцу. Моя цель - создать интерьер, который отвечает вашим ожиданиям и воплощает ваши мечты в реальность
-                img.guarantees-item__img(src='./assets/img/guarantees/guarantees-01.svg', alt='Картинка гарантии')
-            article.guarantees__item.guarantees-item.guarantees-item--second
-                h3.guarantees-item__title Соблюдение сроков и бюджета
-                p.guarantees-item__desc Уважение к вашему времени и финансовым ресурсам представляет собой один из наивысших приоритетов в нашей работе
-                img.guarantees-item__img(src='./assets/img/guarantees/guarantees-02.svg', alt='Картинка гарантии')
-            article.guarantees__item.guarantees-item.guarantees-item--third
-                h3.guarantees-item__title Элегантность, функциональность и комфорт
-                p.guarantees-item__desc Элегантность, которая выглядит привлекательной и изысканной, функциональность, которая обеспечивает практичностьи комфорт, который делает каждый момент наслаждением
-                img.guarantees-item__img(src='./assets/img/guarantees/guarantees-03.svg', alt='Картинка гарантии')
+            .guarantees__list
+                h2.title-section.guarantees__title Гарантии
+                article.guarantees__item.guarantees-item.guarantees-item--first
+                    h3.guarantees-item__title Проект как на картинке
+                    p.guarantees-item__desc Каждый проект будет выполнен в точности согласно представленному визуальному образцу. Моя цель - создать интерьер, который отвечает вашим ожиданиям и воплощает ваши мечты в реальность
+                    img.guarantees-item__img(src='./assets/img/guarantees/guarantees-01.svg', alt='Картинка гарантии')
+                article.guarantees__item.guarantees-item.guarantees-item--second
+                    h3.guarantees-item__title Соблюдение сроков и бюджета
+                    p.guarantees-item__desc Уважение к вашему времени и финансовым ресурсам представляет собой один из наивысших приоритетов в нашей работе
+                    img.guarantees-item__img(src='./assets/img/guarantees/guarantees-02.svg', alt='Картинка гарантии')
+                article.guarantees__item.guarantees-item.guarantees-item--third
+                    h3.guarantees-item__title Элегантность, функциональность и комфорт
+                    p.guarantees-item__desc Элегантность, которая выглядит привлекательной и изысканной, функциональность, которая обеспечивает практичностьи комфорт, который делает каждый момент наслаждением
+                    img.guarantees-item__img(src='./assets/img/guarantees/guarantees-03.svg', alt='Картинка гарантии')
 
-        button.button.button--fill
-            i.button__hover
-            span.button__text Заказать консультацию
-        br
-        button.button.button--outline
-            i.button__hover
-            span.button__text Заказать консультацию
+                    +button("Заказать консультацию", "outline")
