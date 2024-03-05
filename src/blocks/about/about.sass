@@ -50,10 +50,18 @@
     @media (max-width: 480px)
       height: 100%
 
+  &__text-wrapper
+    min-height: 300vh
+    //grid-column: 1 / -1
+    //margin: 250px auto
+
   &__text
-    margin: 250px auto
-    @include fontSize(18, 32)
     grid-column: 1 / -1
+    margin: 250px auto
+    position: sticky
+    top: 200px
+    @include fontSize(18, 32)
+
     &--mobile
       display: none
     @media (max-width: $width-mobile)
@@ -67,5 +75,22 @@
       transition: 0.7s
     p.scroll-text
       color: $white
+
+
+  .paragraph-wrapper
+    height: 150vh
+    grid-column: 1 / -1
+    margin: 250px auto
+
+    #paragraph
+      margin: 0 auto
+      max-width: 850px
+      color: white
+      position: sticky
+      top: 40%
+      font-size: 32px
+      span
+        transition: opacity .3s linear
+
 
 
