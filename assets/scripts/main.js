@@ -113,10 +113,35 @@ if (about) {
     pList.forEach(function (p) {
       return observer.observe(p);
     });
-  };
+  }; //-----------------
   var aboutTextList = about.querySelectorAll(".about__text");
   aboutTextList.forEach(scrollText);
 }
+"use strict";
+
+// Add your text here
+var text = "Более 6 лет создаем интерьер передающий черты его владельца, учитывая образ жизни, увлечения и пожелания всех членов семьи, красивая и удобная обстановка в доме положительно сказывается на настроении, здоровье и финансовом успехе";
+var parentElement = document.getElementById('paragraph');
+var words = text.split(' ');
+words.forEach(function (word) {
+  var span = document.createElement('span');
+  span.style.opacity = 0.2;
+  span.textContent = word + ' ';
+  parentElement.appendChild(span);
+});
+function scrollingText() {
+  var scrollPercentage = window.scrollY / (document.body.offsetHeight - window.innerHeight);
+  var spans = document.querySelectorAll('#paragraph span');
+  var numSpansToChange = Math.ceil(scrollPercentage * 4 * spans.length);
+  spans.forEach(function (span) {
+    span.style.opacity = 0.2;
+  });
+  for (var i = 0; i < numSpansToChange; i++) {
+    spans[i].style.opacity = 1;
+  }
+}
+;
+window.addEventListener('scroll', scrollingText);
 "use strict";
 
 var faq = document.getElementById("faq");
@@ -198,6 +223,32 @@ function mobileNav() {
   };
 }
 mobileNav();
+"use strict";
+
+var swiper = new Swiper('.hero__slider', {
+  // Optional parameters
+  loop: true,
+  effect: 'fade',
+  autoplay: {
+    delay: 3000
+  },
+  pagination: {
+    el: document.getElementById('swiperPagination'),
+    type: 'fraction',
+    formatFractionCurrent: function formatFractionCurrent(number) {
+      return ('0' + number).slice(-2);
+    },
+    formatFractionTotal: function formatFractionTotal(number) {
+      return ('0' + number).slice(-2);
+    },
+    renderFraction: function renderFraction(currentClass, totalClass) {
+      return '<span class="' + currentClass + '"></span>' + '/' + '<span class="' + totalClass + '"></span>';
+    }
+  },
+  scrollbar: {
+    el: document.getElementById('swiperScrollbar')
+  }
+});
 "use strict";
 
 var loader = document.getElementById('loader');
