@@ -225,30 +225,55 @@ function mobileNav() {
 mobileNav();
 "use strict";
 
-var swiper = new Swiper('.hero__slider', {
-  // Optional parameters
-  loop: true,
-  effect: 'fade',
-  autoplay: {
-    delay: 3000
-  },
-  pagination: {
-    el: document.getElementById('swiperPagination'),
-    type: 'fraction',
-    formatFractionCurrent: function formatFractionCurrent(number) {
-      return ('0' + number).slice(-2);
-    },
-    formatFractionTotal: function formatFractionTotal(number) {
-      return ('0' + number).slice(-2);
-    },
-    renderFraction: function renderFraction(currentClass, totalClass) {
-      return '<span class="' + currentClass + '"></span>' + '/' + '<span class="' + totalClass + '"></span>';
+var hero = document.querySelector(".hero");
+if (hero) {
+  var updateScrollbarClass = function updateScrollbarClass() {
+    var activeSlideIndex = Array.from(heroSlides).findIndex(function (slide) {
+      return slide.classList.contains('swiper-slide-active');
+    });
+    swiperScrollbar.classList.remove('first', 'second', 'third');
+    if (activeSlideIndex !== -1) {
+      var classNames = ['first', 'second', 'third'];
+      swiperScrollbar.classList.add(classNames[activeSlideIndex]);
+      var activeSlideLink = heroSlides[activeSlideIndex].dataset.src;
+      heroLink.href = activeSlideLink;
     }
-  },
-  scrollbar: {
-    el: document.getElementById('swiperScrollbar')
-  }
-});
+  };
+  var swiper = new Swiper('.hero__slider', {
+    // Optional parameters
+    loop: true,
+    effect: 'fade',
+    autoplay: {
+      delay: 3000
+    },
+    pagination: {
+      el: document.getElementById('swiperPagination'),
+      type: 'fraction',
+      formatFractionCurrent: function formatFractionCurrent(number) {
+        return ('0' + number).slice(-2);
+      },
+      formatFractionTotal: function formatFractionTotal(number) {
+        return ('0' + number).slice(-2);
+      },
+      renderFraction: function renderFraction(currentClass, totalClass) {
+        return '<span class="' + currentClass + '"></span>' + '/' + '<span class="' + totalClass + '"></span>';
+      }
+    },
+    scrollbar: {
+      el: document.getElementById('swiperScrollbar')
+    }
+  });
+  var heroSlides = hero.querySelectorAll('.hero__slider .swiper-slide');
+  var swiperScrollbar = document.getElementById('swiperScrollbar');
+  var heroLink = hero.querySelector('.hero__link');
+  ;
+  var observerHero = new MutationObserver(updateScrollbarClass);
+  heroSlides.forEach(function (slide) {
+    return observerHero.observe(slide, {
+      attributes: "class"
+    });
+  });
+}
 "use strict";
 
 var loader = document.getElementById('loader');
