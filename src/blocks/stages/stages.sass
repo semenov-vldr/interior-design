@@ -20,10 +20,12 @@
   &__list
     display: flex
     flex-direction: column
-    gap: 144px
+    gap: 176px
     padding-bottom: 300px
+    @media (max-width: $width-tablet)
+      gap: 144px
     @media (max-width: $width-mobile)
-      gap: 92px
+      gap: 120px
       padding-bottom: 20px
       padding-top: 50px
 

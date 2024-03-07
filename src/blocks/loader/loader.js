@@ -1,10 +1,10 @@
-const loader = document.getElementById('loader');
 
 function hideLoader () {
+  const loader = document.getElementById('loader');
   loader.classList.add('hide');
   setTimeout(() => {
     loader.remove();
-  }, 500)
+  }, 500);
 };
 
-if (loader) window.addEventListener('load', hideLoader);
+loader && window.addEventListener('load', hideLoader);

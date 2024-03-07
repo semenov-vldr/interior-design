@@ -19,8 +19,7 @@ const swiper = new Swiper('.hero__slider', {
     formatFractionTotal: (number) => ('0' + number).slice(-2),
     renderFraction: function (currentClass, totalClass) {
       return '<span class="' + currentClass + '"></span>' +
-        '/' +
-        '<span class="' + totalClass + '"></span>';
+        '/' + '<span class="' + totalClass + '"></span>';
     }
   },
 

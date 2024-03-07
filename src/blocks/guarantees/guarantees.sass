@@ -1,15 +1,29 @@
 .guarantees
   padding-bottom: 32px
 
+  &__container
+    display: flex
+    justify-content: space-between
+    gap: 32px
+    @media (max-width: $width-mobile)
+      flex-direction: column
 
   &__title
     position: sticky
     top: 200px
     align-self: flex-start
-    padding-bottom: 500px
+    padding-bottom: 530px
+    &.mobile
+      display: none
+    @media (max-width: 900px)
+      padding-bottom: 590px
     @media (max-width: $width-mobile)
       top: 110px
       padding-bottom: 0
+      &.mobile
+        display: block
+      &.desktop
+        display: none
 
   &__list
     position: relative
