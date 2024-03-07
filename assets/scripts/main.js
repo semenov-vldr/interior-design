@@ -276,15 +276,15 @@ if (hero) {
 }
 "use strict";
 
-var loader = document.getElementById('loader');
 function hideLoader() {
+  var loader = document.getElementById('loader');
   loader.classList.add('hide');
   setTimeout(function () {
     loader.remove();
   }, 500);
 }
 ;
-if (loader) window.addEventListener('load', hideLoader);
+loader && window.addEventListener('load', hideLoader);
 "use strict";
 "use strict";
 "use strict";
