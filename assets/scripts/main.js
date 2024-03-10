@@ -23,6 +23,14 @@ function toggleBlockScrollBody() {
 }
 ;
 "use strict";
+
+var handleModalClick = function handleModalClick(_ref) {
+  var currentTarget = _ref.currentTarget,
+    target = _ref.target;
+  var isClickedOnBackdrop = target === currentTarget;
+  isClickedOnBackdrop && currentTarget.close();
+};
+"use strict";
 "use strict";
 
 var phoneInputs = document.querySelectorAll('input[data-tel-input]');
@@ -113,7 +121,7 @@ if (about) {
     pList.forEach(function (p) {
       return observer.observe(p);
     });
-  }; //-----------------
+  };
   var aboutTextList = about.querySelectorAll(".about__text");
   aboutTextList.forEach(scrollText);
 }
@@ -121,27 +129,30 @@ if (about) {
 
 // Add your text here
 var text = "Более 6 лет создаем интерьер передающий черты его владельца, учитывая образ жизни, увлечения и пожелания всех членов семьи, красивая и удобная обстановка в доме положительно сказывается на настроении, здоровье и финансовом успехе";
-var parentElement = document.getElementById('paragraph');
-var words = text.split(' ');
-words.forEach(function (word) {
-  var span = document.createElement('span');
-  span.style.opacity = 0.2;
-  span.textContent = word + ' ';
-  parentElement.appendChild(span);
-});
-function scrollingText() {
-  var scrollPercentage = window.scrollY / (document.body.offsetHeight - window.innerHeight);
-  var spans = document.querySelectorAll('#paragraph span');
-  var numSpansToChange = Math.ceil(scrollPercentage * 4 * spans.length);
-  spans.forEach(function (span) {
+var about = document.getElementById("about");
+if (about) {
+  var scrollingText = function scrollingText() {
+    var scrollPercentage = window.scrollY / (document.body.offsetHeight - window.innerHeight);
+    var spans = document.querySelectorAll('#paragraph span');
+    var numSpansToChange = Math.ceil(scrollPercentage * 4 * spans.length);
+    spans.forEach(function (span) {
+      span.style.opacity = 0.2;
+    });
+    for (var i = 0; i < numSpansToChange; i++) {
+      spans[i].style.opacity = 1;
+    }
+  };
+  var parentElement = document.getElementById('paragraph');
+  var words = text.split(' ');
+  words.forEach(function (word) {
+    var span = document.createElement('span');
     span.style.opacity = 0.2;
+    span.textContent = word + ' ';
+    parentElement.appendChild(span);
   });
-  for (var i = 0; i < numSpansToChange; i++) {
-    spans[i].style.opacity = 1;
-  }
+  ;
+  window.addEventListener('scroll', scrollingText);
 }
-;
-window.addEventListener('scroll', scrollingText);
 "use strict";
 
 var faq = document.getElementById("faq");
@@ -162,22 +173,32 @@ if (faq) {
 
 function margin() {
   var footer = document.querySelector(".footer");
-  document.body.style.marginBottom = footer.offsetHeight + "px";
-
-  // const hero = document.querySelector(".hero");
-  // const guarantees = document.querySelector(".guarantees");
-  // guarantees.style.marginTop = hero.offsetHeight + "px";
+  if (footer) document.body.style.marginBottom = footer.offsetHeight + "px";
 }
-
 margin();
 window.addEventListener('resize', margin);
 "use strict";
 
-var _aat = aat,
-  ScrollObserver = _aat.ScrollObserver,
-  valueAtPercentage = _aat.valueAtPercentage;
+var formList = document.querySelectorAll("form.form");
+var maskOptions = {
+  mask: '+{7} (000) 000-00-00'
+};
+if (formList) {
+  formList.forEach(function (form) {
+    var inputTel = form.querySelector('input[type=tel]');
+    var mask = IMask(inputTel, maskOptions);
+
+    // const inputName = form.querySelector('input[name=name]');
+    // inputName.value = inputName.value.replace(/[^a-zа-яё\s]/gi, '');
+  });
+}
+"use strict";
+
 var cardsContainer = document.querySelector('.guarantees__list');
 if (cardsContainer) {
+  var _aat = aat,
+    ScrollObserver = _aat.ScrollObserver,
+    valueAtPercentage = _aat.valueAtPercentage;
   var cards = document.querySelectorAll('.guarantees__item');
   Array.from(cards).forEach(function (card, index) {
     var offsetTop = 20 + index * 20;
@@ -278,15 +299,64 @@ if (hero) {
 
 function hideLoader() {
   var loader = document.getElementById('loader');
-  loader.classList.add('hide');
-  setTimeout(function () {
-    loader.remove();
-  }, 500);
+  if (loader) {
+    loader.classList.add('hide');
+    setTimeout(function () {
+      loader.remove();
+    }, 500);
+  }
 }
 ;
-loader && window.addEventListener('load', hideLoader);
+window.addEventListener('load', hideLoader);
+"use strict";
+
+var popup = document.getElementById("popup");
+if (popup) {
+  var btnPopupOpenList = document.querySelectorAll(".js-popup-open");
+  btnPopupOpenList.forEach(function (btnPopupOpen) {
+    btnPopupOpen.addEventListener("click", function () {
+      popup.showModal();
+    });
+  });
+  popup.addEventListener("click", handleModalClick);
+}
 "use strict";
 "use strict";
+
+var quiz = document.getElementById("quiz");
+if (quiz) {
+  var btnQuizOpenList = document.querySelectorAll(".js-quiz-open");
+  btnQuizOpenList.forEach(function (btnQuizOpen) {
+    btnQuizOpen.addEventListener("click", function () {
+      quiz.showModal();
+    });
+  });
+  quiz.addEventListener("click", handleModalClick);
+
+  // Range Price
+
+  var rangeArea = quiz.querySelector(".quiz-step-2__range-slider");
+  var areaField = quiz.querySelector(".quiz-step-2__range-field");
+  var minValue = quiz.querySelector(".quiz-step-2__range-min");
+  var maxValue = quiz.querySelector(".quiz-step-2__range-max");
+  var areaMin = +areaField.dataset.min;
+  var areaMax = +areaField.dataset.max;
+  minValue.textContent = areaMin;
+  maxValue.textContent = areaMax;
+  noUiSlider.create(rangeArea, {
+    start: [areaMin],
+    connect: "lower",
+    step: 10,
+    range: {
+      'min': areaMin,
+      'max': areaMax
+    }
+  });
+  rangeArea.noUiSlider.on('update', function (values, handle) {
+    // при изменений положения элементов управления слайдера изменяем соответствующие значения
+    areaField.value = "".concat(parseInt(values[handle]), " \u043C\xB2");
+  });
+}
 "use strict";
 
 var stages = document.getElementById("stages");
