@@ -1,8 +1,12 @@
-const { ScrollObserver, valueAtPercentage } = aat
+
 
 const cardsContainer = document.querySelector('.guarantees__list');
 
 if (cardsContainer) {
+
+  const { ScrollObserver, valueAtPercentage } = aat;
+
+
   const cards = document.querySelectorAll('.guarantees__item');
 
   Array.from(cards).forEach((card, index) => {

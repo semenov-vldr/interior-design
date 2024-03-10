@@ -51,4 +51,11 @@ const swiper = new Swiper('.hero__slider', {
   heroSlides.forEach(slide => observerHero.observe(slide, {attributes: "class"}));
 
 
+
+
+
+
+
+
+
 }

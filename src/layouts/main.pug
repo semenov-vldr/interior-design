@@ -25,13 +25,21 @@ html(lang="ru-RU")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js")
         //[endif]
 
+        // Анимация блока Гарантии
+        script(type="text/javascript" src="https://unpkg.com/aatjs@0.0.3/dist/aat.min.js")
 
-        script(src="https://unpkg.com/aatjs@0.0.3/dist/aat.min.js")
+        // Input Mask
+        script(type="text/javascript" src="https://unpkg.com/imask")
 
         //axios
         script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js")
 
-        link(href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet")
+        // Butter.js
+        //script(type="text/javascript" src="https://cdn.skypack.dev/butter.js")
+
+        //link(href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet")
+
+
 
 
     body
@@ -40,6 +48,7 @@ html(lang="ru-RU")
             block content
         include ../blocks/footer/footer
         include ../blocks/popup/popup
+        include ../blocks/quiz/quiz
         #contacts
     script(src="./assets/scripts/libs.min.js")
     script(src="./assets/scripts/main.js" type="module")

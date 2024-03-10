@@ -1,4 +1,4 @@
-section.hero.bg-fixed
+section.hero.bg-fixed#hero
     .hero__slider.swiper
         .swiper-wrapper
             .swiper-slide(data-src="#1")
@@ -27,8 +27,8 @@ section.hero.bg-fixed
                         | и общественных помещений
 
                     .hero__actions
-                        +button("Заказать консультацию", "fill")
-                        +button("Рассчитать стоимость", "outline")
+                        +button("Заказать консультацию", "fill", "js-popup-open")
+                        +button("Рассчитать стоимость", "outline", "js-quiz-open")
 
             #swiperPagination.swiper-pagination
             #swiperScrollbar.swiper-scrollbar.second

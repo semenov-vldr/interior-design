@@ -1,0 +1,143 @@
+dialog.quiz#quiz
+
+    button.quiz__close(onclick='window.quiz.close()')
+        include ../../img/icons/close.svg
+
+    .quiz__wrapper
+
+        // --- Шаг 0 ---
+        .quiz__step.quiz__step-0.quiz-step-0.hidden
+            .quiz-step-1__img
+                img(src="./assets/img/quiz/01.jpg")
+
+            .quiz-step-0__content
+               h3.quiz__step-title Узнать стоимость <br> дизайна интерьера
+               p.quiz-step-0__subtitle Пройдите тест из 5 шагов и получите расчет стоимости
+
+               +button("Узнать стоимость", "fill-dark", "quiz-step-0__btn")
+
+
+
+        // Список шагов с 1 по 5
+        .quiz__steps
+
+            // --- QUIZ PROGRESS ---
+            .quiz__progress
+                span.quiz__progress-total 1/5
+                .quiz__progress-line
+                    .quiz__progress-inner
+
+            // --- Шаг 1 ---
+            .quiz__step.quiz__step-1.quiz-step-1.hidden
+                .quiz-step-1__content
+                    h3.quiz__step-title Тип помещения
+
+                    fieldset.quiz-step-1__fieldset
+
+                        .quiz-step-1__checkbox
+                            input(type="radio" id="quiz-type-1" name="type" value="Частный дом")
+                            label(for="quiz-type-1")
+                                .quiz-step-1__checkbox-img
+                                    img(src="./assets/img/quiz/type-1.jpg")
+                                span Частный дом
+
+                        .quiz-step-1__checkbox
+                            input(type="radio" id="quiz-type-2" name="type" value="Квартира")
+                            label(for="quiz-type-2")
+                                .quiz-step-1__checkbox-img
+                                    img(src="./assets/img/quiz/type-2.jpg")
+                                span Квартира
+
+
+            // --- Шаг 2 ---
+            .quiz__step.quiz__step-2.quiz-step-2.hidden
+                .quiz-step-2__content
+                    h3.quiz__step-title Общая площадь помещений
+
+                    .quiz-step-2__range
+                        input.quiz-step-2__range-field(data-min="20" data-max="500" readonly)
+                        .quiz-step-2__range-slider
+                            span.quiz-step-2__range-min
+                            span.quiz-step-2__range-max
+
+
+            // --- Шаг 3 ---
+            .quiz__step.quiz__step-3.quiz-step-3.hidden
+                .quiz-step-3__content
+                    h3.quiz__step-title Какой бюджет вы рассчитываете потратить на реализацию интерьера?
+
+                    fieldset.quiz-step-3__budget.budget
+
+                        .budget__item
+                            input(id="quiz-budget-1" type="radio" name="budget" value="4 млн")
+                            label(for="quiz-budget-1")
+                                span До 4 млн ₽
+
+                        .budget__item
+                            input(id="quiz-budget-2" type="radio" name="budget" value="8 млн")
+                            label(for="quiz-budget-2")
+                                span До 8 млн ₽
+
+                        .budget__item
+                            input(id="quiz-budget-3" type="radio" name="budget" value="15 млн")
+                            label(for="quiz-budget-3")
+                                span До 15 млн ₽
+
+                        .budget__item
+                            input(id="quiz-budget-4" type="radio" name="budget" value="более 15 млн")
+                            label(for="quiz-budget-4")
+                                span Более 15 млн ₽
+
+
+
+            // --- Шаг 4 ---
+            .quiz__step.quiz__step-4.quiz-step-4.hidden
+                .quiz-step-4__content
+                    h3.quiz__step-title Тип помещения
+
+                    fieldset.quiz-step-4__fieldset
+
+                        .quiz-step-4__checkbox
+                            input(type="radio" id="quiz-style-1" name="style" value="Loft")
+                            label(for="quiz-style-1")
+                                .quiz-step-4__checkbox-img
+                                    img(src="./assets/img/quiz/style-1.jpg")
+                                span Loft
+
+                        .quiz-step-4__checkbox
+                            input(type="radio" id="quiz-style-2" name="style" value="Luxury")
+                            label(for="quiz-style-2")
+                                .quiz-step-4__checkbox-img
+                                    img(src="./assets/img/quiz/style-2.jpg")
+                                span Luxury
+
+                        .quiz-step-4__checkbox
+                            input(type="radio" id="quiz-style-3" name="style" value="Minimalism")
+                            label(for="quiz-style-3")
+                                .quiz-step-4__checkbox-img
+                                    img(src="./assets/img/quiz/style-3.jpg")
+                                span Minimalism
+
+                        .quiz-step-4__checkbox
+                            input(type="radio" id="quiz-style-4" name="style" value="Нужен совет")
+                            label(for="quiz-style-4")
+                                .quiz-step-4__checkbox-img
+                                    img(src="./assets/img/quiz/style-4.jpg")
+                                span Нужен совет
+
+
+            // --- Шаг 5 ---
+            .quiz__step.quiz__step-5.quiz-step-5.hiddenn
+                .quiz-step-5__content
+                    h3.quiz__step-title Добавьте планировку
+
+                    .add-layout
+                        input(type="file" id="file")
+                        label(for="file")
+
+
+
+
+            // --- QUIZ FOOTER ---
+            .quiz__steps-footer
+                +button("Далее", "fill-dark", "quiz__steps-next")

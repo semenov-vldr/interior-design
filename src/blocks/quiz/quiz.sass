@@ -1,0 +1,311 @@
+$paddingQuiz: 55px 20px 20px
+$paddingQuizMobile: 48px 16px 16px
+
+.quiz
+  margin: auto
+  width: calc(100% - 50px)
+  max-width: 800px
+  background-color: #E8E5E2
+  border-radius: 20px
+  overflow: auto
+  min-height: 450px
+  @media (max-width: $width-mobile)
+    max-width: 500px
+    width: calc(100% - 16px)
+    min-height: 400px
+
+  &::backdrop,
+  & + .backdrop
+    background-color: rgba(#000, 0.7)
+
+  &__close
+    position: absolute
+    right: 25px
+    top: 25px
+    z-index: 2
+    transition: $transition
+    &:hover
+      opacity: 0.8
+    @media (max-width: $width-mobile)
+      right: 20px
+      top: 20px
+
+  img
+    width: 100%
+    height: 100%
+    object-fit: cover
+
+  &__step-title
+    margin-bottom: 32px
+    @include fontSize(20, 24)
+    text-align: center
+
+  // --- Шаг 0 ---
+
+  &-step-0
+    display: grid
+    grid-template-columns: 1fr 1fr
+
+    &__content
+      display: flex
+      flex-direction: column
+      gap: 24px
+      padding: 52px 16px
+      text-align: center
+
+    &__btn
+      width: 100%
+      margin-top: auto
+
+
+  &__steps
+    padding: $paddingQuiz
+    @media (max-width: $width-mobile)
+      padding: $paddingQuizMobile
+  &__steps-footer
+    margin-top: 56px
+    display: flex
+    justify-content: center
+    @media (max-width: $width-mobile)
+      .quiz__steps-next
+        width: 100%
+
+
+  &__progress
+    position: relative
+    margin-bottom: 32px
+    &-total
+      position: absolute
+      bottom: 16px
+    &-line
+      width: 100%
+      height: 2px
+      background-color: rgba($bg, 0.4)
+    &-inner
+      height: 100%
+      width: 20%
+      background-color: $bg
+    @media (max-width: $width-mobile)
+      &-total
+        bottom: 12px
+
+
+  // --- Шаг 1 ---
+
+  &-step-1
+
+    &__fieldset
+      display: flex
+      align-items: center
+      justify-content: center
+      gap: 20px
+
+    &__checkbox
+      input[type=radio]
+        display: none
+        &:checked + label img
+          filter: brightness(30%)
+        &:checked + label .quiz-step-1__checkbox-img::after
+          display: block
+      label
+        display: flex
+        flex-direction: column
+        align-items: center
+        gap: 8px
+
+      &-img
+        position: relative
+        width: 100%
+        overflow: hidden
+        max-width: 180px
+        aspect-ratio: 1 / 1
+        border-radius: 16px
+        &::after
+          display: none
+          content: ""
+          position: absolute
+          background-image: url("../img/icons/quiz-check.svg")
+          width: 60px
+          height: 42px
+          background-position: center
+          background-size: cover
+          background-repeat: no-repeat
+          inset: 0
+          margin: auto
+
+
+  // --- Шаг 2 ---
+
+  &-step-2
+
+    &__range
+      max-width: 400px
+      flex-direction: column
+      margin: 48px auto 0
+      @extend .flex-center
+      &-field
+        width: 100%
+        padding: 8px 16px
+        font-size: 16px
+        border-radius: 6px
+        border: 1px solid $bg
+        min-height: 43px
+      &-slider
+        margin-top: 36px
+        width: 100%
+      .noUi-horizontal
+        border: none
+        height: 4px
+        border-radius: 4px
+        .noUi-base
+          background-color: rgba($bg, 0.4)
+        .noUi-connect
+          background-color: $bg
+
+        .noUi-handle
+          background-color: $bg
+          width: 24px
+          height: 24px
+          border-radius: 50%
+          top: 2px
+          transform: translateY(-50%)
+          border: none
+          box-shadow: none
+          cursor: pointer
+          &::before,
+          &::after
+            display: none
+
+      &-min,
+      &-max
+        position: absolute
+        font-size: 14px
+        color: rgba($bg, 0.7)
+        top: 20px
+      &-max
+        right: 0
+
+
+  // --- Шаг 3 ---
+
+  &-step-3
+
+    &__content
+      max-width: 600px
+      margin: 0 auto
+
+    .budget
+      display: grid
+      grid-template-columns: 1fr 1fr
+      grid-gap: 20px
+      @media (max-width: $width-mobile)
+        grid-gap: 16px
+
+      &__item
+        input
+          display: none
+          &:checked + label span::before
+            background-image: url("../img/icons/radio-ok.svg")
+        label
+          display: inline-block
+          font-size: 16px
+          color: #fff
+          background-color: rgba($bg, 0.9)
+          width: 100%
+          max-width: 285px
+          padding: 16px
+          border-radius: 5px
+          @media (max-width: $width-mobile)
+            font-size: 14px
+            padding: 10px 8px
+
+          span
+            position: relative
+            display: flex
+            align-items: center
+            gap: 8px
+            &::before
+              content: ""
+              display: inline-block
+              background-image: url("../img/icons/radio-off.svg")
+              width: 16px
+              height: 16px
+              background-position: center
+              background-size: cover
+              background-repeat: no-repeat
+
+
+
+  &-step-4
+
+    &__fieldset
+      display: flex
+      align-items: center
+      justify-content: center
+      gap: 20px
+      @media (max-width: $width-mobile)
+        flex-wrap: wrap
+        gap: 16px
+
+    &__checkbox
+      input[type=radio]
+        display: none
+        &:checked + label img
+          filter: brightness(30%)
+        &:checked + label .quiz-step-4__checkbox-img::after
+          display: block
+      label
+        display: flex
+        flex-direction: column
+        align-items: center
+        gap: 8px
+
+      &-img
+        position: relative
+        width: 100%
+        overflow: hidden
+        max-width: 180px
+        aspect-ratio: 1 / 1
+        border-radius: 16px
+        @media (max-width: $width-mobile)
+          max-width: 140px
+        &::after
+          display: none
+          content: ""
+          position: absolute
+          background-image: url("../img/icons/quiz-check.svg")
+          width: 60px
+          height: 42px
+          background-position: center
+          background-size: cover
+          background-repeat: no-repeat
+          inset: 0
+          margin: auto
+
+
+  &-step-5
+
+    .add-layout
+      input
+        display: none
+      label
+        @extend .flex-center
+        position: relative
+        background-color: #D9D9D9
+        width: 170px
+        aspect-ratio: 1 / 1
+        border-radius: 14px
+        margin: 0 auto
+        &::after
+          content: ""
+          position: absolute
+          background-image: url("../img/icons/file-add.svg")
+          width: 29px
+          height: 38px
+          background-position: center
+          background-size: cover
+          background-repeat: no-repeat
+        @media (max-width: $width-mobile)
+          width: 140px
+
+
