@@ -87,7 +87,7 @@ gulp.task("images:dev", function () {
   return gulp
     .src("./src/img/**/*.{png,svg,jpg,jpeg,gif,webp}")
     .pipe(changed("./build/img/"))
-    .pipe(imagemin({ verbose: true } ))
+    // .pipe(imagemin({ verbose: true } ))
     .pipe(gulp.dest("./build/assets/img/"))
 });
 
