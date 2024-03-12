@@ -321,6 +321,13 @@ if (popup) {
   popup.addEventListener("click", handleModalClick);
 }
 "use strict";
+
+AOS.init({
+  disable: function disable() {
+    var maxWidth = 767;
+    return window.innerWidth < maxWidth;
+  }
+});
 "use strict";
 
 var quiz = document.getElementById("quiz");
