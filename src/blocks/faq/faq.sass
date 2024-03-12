@@ -25,10 +25,14 @@
   &__item
     padding: 32px 0 16px
     border-bottom: 1px solid rgba(#fff, 0.4)
+    overflow: hidden
     @media (max-width: $width-mobile)
       padding: 20px 0 12px
     &.js-faq-active .faq__content
-      display: block
+      max-height: 800px
+      padding: 16px 0 0
+      @media (max-width: $width-mobile)
+        padding: 12px 0 0
     &.js-faq-active .faq__title,
     &:hover .faq__title
       color: #fff
@@ -61,10 +65,12 @@
 
   &__content
     @include fontSize(14, 18)
-    display: none
-    padding: 16px 0 0
+    padding: 0
+    max-height: 0
+    transition: $transition
+    overflow: hidden
     @media (max-width: $width-mobile)
-      padding: 12px 0 0
+      padding: 0
 
   &__actions
     margin: 48px auto 0
