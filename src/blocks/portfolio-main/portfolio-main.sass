@@ -15,6 +15,7 @@ $heightPortfolio: 550px
       gap: 32px
 
     & > h2
+      @include fontSize(20, 40)
       @media (max-width: $width-mobile)
         display: none
 
@@ -76,11 +77,11 @@ $heightPortfolio: 550px
       grid-column: 3 / 8
     &:nth-child(6)
       @media (min-width: $width-mobile)
-        margin-top: $heightPortfolio / 1.8 * -1
+        margin-top:  - $heightPortfolio / 1.8
         grid-column: 8 / -1
     &:nth-child(7)
       @media (min-width: $width-mobile)
-        margin-top: $heightPortfolio / 5 * -1
+        margin-top: - $heightPortfolio / 4
         grid-column: 9 / -1
 
   &-item__title

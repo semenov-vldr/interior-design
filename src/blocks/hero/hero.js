@@ -52,10 +52,4 @@ const swiper = new Swiper('.hero__slider', {
 
 
 
-
-
-
-
-
-
 }

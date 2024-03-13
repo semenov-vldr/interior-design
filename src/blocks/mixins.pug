@@ -1,5 +1,11 @@
-mixin button(title, type, addedClass_1, addedClass_2)
+mixin button(title, type, addedClass_1 = "", addedClass_2 = "")
     button.button(type="button" class = `button--${type} ${addedClass_1} ${addedClass_2}`)
+        i.button__hover
+        span.button__text= title
+
+
+mixin button-link(link, title, type, addedClass_1 = "", addedClass_2 = "")
+    a.button(href=link type="button" class = `button--${type} ${addedClass_1} ${addedClass_2}`)
         i.button__hover
         span.button__text= title
 
