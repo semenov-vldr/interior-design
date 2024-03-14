@@ -47,6 +47,7 @@ $heightPortfolio: 550px
     object-fit: cover
     box-shadow: rgba(#1A1A1A, 0.3) 0 4px 16px
     border-radius: 6px
+    transition: $transition
     @media (max-width: $width-mobile)
       height: auto
       aspect-ratio: 1 / 1
@@ -54,12 +55,15 @@ $heightPortfolio: 550px
     position: relative
     background-color: $bg
     transition: $transition
+    height: fit-content
     @media (max-width: $width-mobile)
       position: sticky
       top: 150px
       max-width: 400px
       margin: 0 auto
       width: 100%
+    &:hover img
+      filter: brightness(85%)
 
     &:nth-child(1)
       grid-column: 1 / 6

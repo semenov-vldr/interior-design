@@ -38,6 +38,7 @@
     &__link
       position: relative
       display: block
+      transition: $transition
       img
         width: 330px
         max-width: none
@@ -52,19 +53,8 @@
           width: 140px
         @media (max-width: 360px)
           width: 100px
-      &::after
-        content: ""
-        position: absolute
-        width: 100%
-        height: 100%
-        background-color: rgba(#000, 0.3)
-        z-index: 1
-        top: 0
-        left: 0
-        border-radius: 12px
-        transition: $transition
-      &:hover::after
-        background-color: rgba(#000, 0.25)
+      &:hover
+        filter: brightness(80%)
 
 
     &__marquee
