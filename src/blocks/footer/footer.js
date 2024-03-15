@@ -2,7 +2,9 @@
 
 function margin() {
   const footer = document.querySelector(".footer");
-  if (footer) document.body.style.marginBottom = footer.offsetHeight + "px";
+  if (footer) {
+    document.body.style.marginBottom = footer.offsetHeight + "px";
+  }
 }
 
 margin();

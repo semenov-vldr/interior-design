@@ -6,3 +6,34 @@ block variables
 block content
     include ../blocks/portfolio-inner/portfolio-hero/st-bakhrushin
     include ../blocks/portfolio-inner/portfolio-gallery/st-bakhrushin
+
+
+    section.others
+        .others__container.container
+
+            h2.title-section Другие проекты
+
+            .others__list
+
+                a.others__item.others-item(href="zhk-nagatino-i-land.html")
+                    picture
+                        source(srcset="./assets/img/portfolio-main/mobile/01.jpg" media="(max-width: 767px)")
+                        img.others-item__img(src="./assets/img/portfolio-main/desktop/01.jpg")
+                    h3.others-item__title ЖК Nagatino i-Land
+                    span.others-item__area 81 м²
+
+
+                a.others__item.others-item(href="zhk-now.html")
+                    picture
+                        source(srcset="./assets/img/portfolio-main/mobile/02.jpg" media="(max-width: 767px)")
+                        img.others-item__img(src="./assets/img/portfolio-main/desktop/02.jpg")
+                    h3.others-item__title ЖК Now
+                    span.others-item__area 41 м²
+
+
+                a.others__item.others-item(href="sampo.html")
+                    picture
+                        source(srcset="./assets/img/portfolio-main/mobile/03.jpg" media="(max-width: 767px)")
+                        img.others-item__img(src="./assets/img/portfolio-main/desktop/03.jpg")
+                    h3.others-item__title САМПО
+                    span.others-item__area 61 м²

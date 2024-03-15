@@ -1,0 +1,42 @@
+.others
+
+  &__container
+    display: flex
+    gap: 96px
+    justify-content: space-between
+    @media (max-width: $width-tablet)
+      gap: 32px
+    @media (max-width: $width-mobile)
+      flex-direction: column
+      gap: 0
+
+  &__list
+    overflow: auto
+    display: flex
+    gap: 20px
+    @media (min-width: $width-tablet)
+      justify-content: flex-end
+
+
+  &-item
+    display: flex
+    flex-direction: column
+    flex: 0 0 285px
+    &:hover img
+      filter: brightness(85%)
+
+    &__img
+      display: block
+      border-radius: 6px
+      width: 100%
+      transition: $transition
+      aspect-ratio: 6 / 7
+
+    &__title
+      margin: 16px 0 8px
+      @media (min-width: $width-mobile)
+        font-size: 18px
+
+    &__area
+      @media (min-width: $width-mobile)
+        font-size: 20px

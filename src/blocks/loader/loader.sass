@@ -22,9 +22,12 @@
 
 
   svg .text
-    animation: 10000ms spin
+    animation-name: spin
+    animation-duration: 5s
     animation-fill-mode: backwards
     transform-origin: center center
+    animation-timing-function: linear
+    animation-iteration-count: infinite
 
   @keyframes spin
     from

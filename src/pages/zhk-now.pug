@@ -6,3 +6,33 @@ block variables
 block content
     include ../blocks/portfolio-inner/portfolio-hero/zhk-now
     include ../blocks/portfolio-inner/portfolio-gallery/zhk-now
+
+
+    section.others
+        .others__container.container
+
+            h2.title-section Другие проекты
+
+            .others__list
+
+                a.others__item.others-item(href="sampo.html")
+                    picture
+                        source(srcset="./assets/img/portfolio-main/mobile/03.jpg" media="(max-width: 767px)")
+                        img.others-item__img(src="./assets/img/portfolio-main/desktop/03.jpg")
+                    h3.others-item__title САМПО
+                    span.others-item__area 61 м²
+
+                a.others__item.others-item(href="zhk-scandinavia.html")
+                    picture
+                        source(srcset="./assets/img/portfolio-main/mobile/04.jpg" media="(max-width: 767px)")
+                        img.others-item__img(src="./assets/img/portfolio-main/desktop/04.jpg")
+                    h3.others-item__title ЖК Скандинавия
+                    span.others-item__area 85 м²
+
+
+                a.others__item.others-item(href="zhk-scandinavia-2.html")
+                    picture
+                        source(srcset="./assets/img/portfolio-main/mobile/05.jpg" media="(max-width: 767px)")
+                        img.others-item__img(src="./assets/img/portfolio-main/desktop/05.jpg")
+                    h3.others-item__title ЖК Скандинавия 2
+                    span.others-item__area 97 м²

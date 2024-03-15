@@ -1,5 +1,4 @@
 .portfolio-gallery
-  padding-bottom: 144px
 
   &__list
     display: flex
@@ -50,17 +49,27 @@
     grid-template-columns: 1.35fr 1.7fr 1fr
     @media (max-width: 640px)
       grid-template-columns: 1fr 1fr
-      picture:nth-child(2)
+
+      &.nagatino picture:nth-child(1),
+      &.now picture:nth-child(2),
+      &.sampo picture:nth-child(2),
+      &.scandinavia picture:nth-child(2),
+      &.scandinavia-2 picture:nth-child(2),
+      &.mozhaisk picture:nth-child(1),
+      &.st-bakhrushin picture:nth-child(2)
         grid-column: 1 / -1
         grid-row: 1 / 2
-      picture:nth-child(1),
-      picture:nth-child(3)
-        grid-row: 2 / 3
+      &.now picture:nth-child(1),
+      &.scandinavia-2 picture:nth-child(1)
+        order: 1
 
   &__article:nth-child(3)
     grid-template-columns: 2fr 1fr
     @media (max-width: 640px)
       grid-template-columns: 1fr
+      &.scandinavia picture:nth-child(1),
+      &.mozhaisk picture:nth-child(1)
+        order: 1
 
   &__article:nth-child(4)
     grid-template-columns: 1fr 1fr

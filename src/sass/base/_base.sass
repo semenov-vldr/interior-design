@@ -14,12 +14,18 @@ body
   flex-direction: column
   background-color: $bg
 
+
 main.main
   display: flex
   flex-direction: column
   flex-grow: 1
   gap: 120px
   background-color: $bg
+  padding-bottom: 144px
+  @media (max-width: $width-tablet)
+    padding-bottom: 96px
   @media (max-width: $width-mobile)
     gap: 80px
+    padding-bottom: 80px
+
 
