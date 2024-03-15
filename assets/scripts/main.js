@@ -171,7 +171,9 @@ if (faq) {
 
 function margin() {
   var footer = document.querySelector(".footer");
-  if (footer) document.body.style.marginBottom = footer.offsetHeight + "px";
+  if (footer) {
+    document.body.style.marginBottom = footer.offsetHeight + "px";
+  }
 }
 margin();
 window.addEventListener('resize', margin);
