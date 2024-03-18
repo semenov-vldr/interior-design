@@ -1,5 +1,48 @@
 "use strict";
 
+// Отправка данных формы в Телеграм
+var TOKEN = "6388509099:AAFIQyVlZ4MapEiXhH2vQJh8CyZFgFoJ_mA";
+var CHAT_ID = "-1002008090284";
+var URL_API = "https://api.telegram.org/bot".concat(TOKEN, "/sendMessage");
+var forms = document.querySelectorAll("form.form");
+if (forms) {
+  forms.forEach(function (form) {
+    return form.addEventListener("submit", sendMessageTelegram);
+  });
+}
+function sendMessageTelegram(evt) {
+  evt.preventDefault();
+  var typeConnection = this.querySelector(".form__connection-fieldset  input[type='radio']:checked");
+  var successFormMessage = this.querySelector('.form__message--success');
+  var errorFormMessage = this.querySelector('.form__message--error');
+  function formSuccess() {
+    successFormMessage.classList.add('js-message-active');
+  }
+  function formError() {
+    errorFormMessage.classList.add('js-message-active');
+  }
+  var message = "<b>\u0417\u0430\u044F\u0432\u043A\u0430 \u0414\u0438\u0437\u0430\u0439\u043D \u0418\u043D\u0442\u0435\u0440\u044C\u0435\u0440\u0430</b>\n";
+  message += "<b>\u0418\u043C\u044F: ".concat(this.name.value, " </b>\n");
+  message += "<b>\u0422\u0435\u043B\u0435\u0444\u043E\u043D: ".concat(this.tel.value, " </b>\n");
+  message += "<b>\u0421\u043F\u043E\u0441\u043E\u0431 \u0441\u0432\u044F\u0437\u0438: ".concat(typeConnection.value, " </b>\n");
+  axios.post(URL_API, {
+    chat_id: CHAT_ID,
+    parse_mode: "html",
+    text: message
+  }).then(function () {
+    console.log("Заявка отправлена");
+    formSuccess();
+  })["catch"](function (err) {
+    console.warn(err);
+    formError();
+  })["finally"](function () {
+    console.log("Конец");
+  });
+  this.reset();
+}
+;
+"use strict";
+
 var html = document.querySelector('html');
 var classBlockScroll = "js-block-scroll";
 function blockScrollBody() {
@@ -24,11 +67,33 @@ function toggleBlockScrollBody() {
 ;
 "use strict";
 
-var handleModalClick = function handleModalClick(_ref) {
-  var currentTarget = _ref.currentTarget,
-    target = _ref.target;
-  var isClickedOnBackdrop = target === currentTarget;
-  isClickedOnBackdrop && currentTarget.close();
+function closingDialog(_ref) {
+  var target = _ref.target;
+  var dialog = target.closest("dialog");
+  var form = dialog.querySelector("form");
+  dialog.querySelectorAll(".form__message").forEach(function (message) {
+    message.classList.remove('js-message-active');
+  });
+  dialog.close();
+  form.reset();
+  if (dialog.classList.contains("quiz")) {
+    var inputs = dialog.querySelectorAll('input');
+    inputs.forEach(function (input) {
+      return input.value = "";
+    });
+  }
+}
+var closeDialogBtns = document.querySelectorAll(".close-dialog");
+if (closeDialogBtns) {
+  closeDialogBtns.forEach(function (closeBtn) {
+    closeBtn.addEventListener("click", closingDialog);
+  });
+}
+"use strict";
+
+var handleModalClick = function handleModalClick(evt) {
+  var isClickedOnBackdrop = evt.target === evt.currentTarget;
+  isClickedOnBackdrop && closingDialog(evt);
 };
 "use strict";
 "use strict";
@@ -187,9 +252,6 @@ if (formList) {
   formList.forEach(function (form) {
     var inputTel = form.querySelector('input[type=tel]');
     var mask = IMask(inputTel, maskOptions);
-
-    // const inputName = form.querySelector('input[name=name]');
-    // inputName.value = inputName.value.replace(/[^a-zа-яё\s]/gi, '');
   });
 }
 "use strict";
@@ -310,8 +372,10 @@ function hideLoader() {
 window.addEventListener('load', hideLoader);
 "use strict";
 
+// Dialog popup
 var popup = document.getElementById("popup");
 if (popup) {
+  // Кнопки с классом, которые открывают поп-ап
   var btnPopupOpenList = document.querySelectorAll(".js-popup-open");
   btnPopupOpenList.forEach(function (btnPopupOpen) {
     btnPopupOpen.addEventListener("click", function () {
@@ -319,6 +383,8 @@ if (popup) {
     });
   });
   popup.addEventListener("click", handleModalClick);
+  var closePopup = popup.querySelector(".popup__close");
+  closePopup.addEventListener("click", closingDialog);
 }
 "use strict";
 
@@ -332,16 +398,48 @@ AOS.init({
 
 var quiz = document.getElementById("quiz");
 if (quiz) {
+  // Показ активного шага квиза
+  var quizDisplay = function quizDisplay(questionCount) {
+    quizSteps.forEach(function (quizStep) {
+      quizStep.classList.add('hidden');
+    });
+    quizSteps[questionCount].classList.remove('hidden');
+  };
+  var handlerLearnMoreBtn = function handlerLearnMoreBtn() {
+    step_0.classList.add("hidden");
+    quizStepList.classList.remove('hidden');
+  };
+  var handlerQuizNextBtn = function handlerQuizNextBtn() {
+    questionCount++;
+    quizDisplay(questionCount);
+    quizProgressTotal.textContent = "".concat(questionCount, "/").concat(quizSteps.length - 2);
+    quizProgressInner.style.width = "".concat(100 / (quizSteps.length - 2) * questionCount, "%");
+    if (questionCount === quizSteps.length - 1) {
+      quizStepsFooter.classList.add("hidden");
+      quizProgress.classList.add("hidden");
+      var inputs = quiz.querySelectorAll("input");
+      var checkedRoomType = quiz.querySelector(".quiz__step-1 fieldset input[type='radio']:checked").value;
+      var checkedBudget = quiz.querySelector(".quiz__step-3 fieldset input[type='radio']:checked").value;
+      var checkedStyleRoom = quiz.querySelector(".quiz__step-4 fieldset input[type='radio']:checked").value;
+      console.log(checkedRoomType, areaField.value, checkedBudget, checkedStyleRoom);
+    }
+  };
+  // Кнопки с классом, которые открывают Квиз
   var btnQuizOpenList = document.querySelectorAll(".js-quiz-open");
   btnQuizOpenList.forEach(function (btnQuizOpen) {
     btnQuizOpen.addEventListener("click", function () {
       quiz.showModal();
     });
   });
+
+  // Закрытие квиза по клику вне квиза
   quiz.addEventListener("click", handleModalClick);
 
-  // Range Price
+  // Закрытие квиза
+  var closeQuiz = quiz.querySelector(".quiz__close");
+  closeQuiz.addEventListener("click", closingDialog);
 
+  // --- Range Price ---
   var rangeArea = quiz.querySelector(".quiz-step-2__range-slider");
   var areaField = quiz.querySelector(".quiz-step-2__range-field");
   var minValue = quiz.querySelector(".quiz-step-2__range-min");
@@ -359,10 +457,27 @@ if (quiz) {
       'max': areaMax
     }
   });
+
+  // при изменений положения элементов управления слайдера изменяем соответствующие значения
   rangeArea.noUiSlider.on('update', function (values, handle) {
-    // при изменений положения элементов управления слайдера изменяем соответствующие значения
     areaField.value = "".concat(parseInt(values[handle]), " \u043C\xB2");
   });
+
+  // --- Переключение шагов квиза ---
+
+  var quizSteps = quiz.querySelectorAll(".quiz__step");
+  var quizNextBtn = quiz.querySelector(".quiz__steps-next");
+  var step_0 = quiz.querySelector(".quiz__step.quiz__step-0");
+  var quizStepList = quiz.querySelector(".quiz__steps");
+  var quizStepsFooter = quiz.querySelector(".quiz__steps-footer");
+  var quizProgress = quiz.querySelector(".quiz__progress");
+  var quizProgressInner = quizProgress.querySelector(".quiz__progress-inner");
+  var quizProgressTotal = quizProgress.querySelector(".quiz__progress-total");
+  var questionCount = 1;
+  ;
+  var learnMoreBtn = quiz.querySelector(".quiz-step-0__btn");
+  learnMoreBtn.addEventListener('click', handlerLearnMoreBtn);
+  quizNextBtn.addEventListener('click', handlerQuizNextBtn);
 }
 "use strict";
 
