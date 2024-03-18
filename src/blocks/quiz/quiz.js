@@ -2,6 +2,7 @@ const quiz = document.getElementById("quiz");
 
 if (quiz) {
 
+  // Кнопки с классом, которые открывают Квиз
   const btnQuizOpenList = document.querySelectorAll(".js-quiz-open");
 
   btnQuizOpenList.forEach(btnQuizOpen => {
@@ -10,12 +11,14 @@ if (quiz) {
     });
   });
 
+  // Закрытие квиза по клику вне квиза
   quiz.addEventListener("click", handleModalClick);
 
+  // Закрытие квиза
+  const closeQuiz = quiz.querySelector(".quiz__close");
+  closeQuiz.addEventListener("click", closingDialog);
 
-
-  // Range Price
-
+  // --- Range Price ---
   const rangeArea = quiz.querySelector(".quiz-step-2__range-slider");
   const areaField = quiz.querySelector(".quiz-step-2__range-field");
   const minValue = quiz.querySelector(".quiz-step-2__range-min");
@@ -36,9 +39,67 @@ if (quiz) {
     },
   });
 
-  rangeArea.noUiSlider.on('update', function (values, handle) { // при изменений положения элементов управления слайдера изменяем соответствующие значения
+  // при изменений положения элементов управления слайдера изменяем соответствующие значения
+  rangeArea.noUiSlider.on('update', function (values, handle) {
     areaField.value = `${parseInt(values[handle])} м²`;
   });
+
+
+  // --- Переключение шагов квиза ---
+
+  const quizSteps = quiz.querySelectorAll(".quiz__step");
+  const quizNextBtn = quiz.querySelector(".quiz__steps-next");
+  const step_0 = quiz.querySelector(".quiz__step.quiz__step-0");
+  const quizStepList = quiz.querySelector(".quiz__steps");
+  const quizStepsFooter = quiz.querySelector(".quiz__steps-footer");
+  const quizProgress = quiz.querySelector(".quiz__progress");
+  const quizProgressInner = quizProgress.querySelector(".quiz__progress-inner");
+  const quizProgressTotal = quizProgress.querySelector(".quiz__progress-total");
+
+  let questionCount = 1;
+
+  // Показ активного шага квиза
+  function quizDisplay (questionCount) {
+    quizSteps.forEach(quizStep => {
+      quizStep.classList.add('hidden');
+    });
+    quizSteps[questionCount].classList.remove('hidden');
+  };
+
+  const learnMoreBtn = quiz.querySelector(".quiz-step-0__btn");
+  learnMoreBtn.addEventListener('click', handlerLearnMoreBtn);
+
+  function handlerLearnMoreBtn () {
+    step_0.classList.add("hidden");
+    quizStepList.classList.remove('hidden');
+  }
+
+  function handlerQuizNextBtn () {
+    questionCount ++;
+    quizDisplay (questionCount);
+
+    quizProgressTotal.textContent = `${questionCount}/${quizSteps.length - 2}`
+    quizProgressInner.style.width = `${100 / (quizSteps.length - 2) * questionCount}%`
+
+
+    if (questionCount === quizSteps.length - 1) {
+      quizStepsFooter.classList.add("hidden");
+      quizProgress.classList.add("hidden");
+
+      const inputs = quiz.querySelectorAll("input");
+
+      const checkedRoomType = quiz.querySelector(".quiz__step-1 fieldset input[type='radio']:checked").value;
+      const checkedBudget = quiz.querySelector(".quiz__step-3 fieldset input[type='radio']:checked").value;
+      const checkedStyleRoom = quiz.querySelector(".quiz__step-4 fieldset input[type='radio']:checked").value;
+      console.log(checkedRoomType, areaField.value, checkedBudget, checkedStyleRoom)
+
+
+
+    }
+  }
+
+  quizNextBtn.addEventListener('click', handlerQuizNextBtn);
+
 
 }
 

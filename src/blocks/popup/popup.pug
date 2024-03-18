@@ -1,9 +1,9 @@
 dialog.popup#popup
-    button.popup__close(onclick='window.popup.close()')
+    button.popup__close
         include ../../img/icons/close.svg
 
     .popup__wrapper
         .popup__img
-            img(src='./assets/img/popup.jpg', alt)
+            img(src='./assets/img/popup.jpg')
 
         +form("Удобный способ связи", "Заказать консультацию")

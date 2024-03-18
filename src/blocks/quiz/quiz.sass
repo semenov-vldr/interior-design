@@ -85,6 +85,7 @@ $paddingQuizMobile: 48px 16px 16px
       height: 100%
       width: 20%
       background-color: $bg
+      transition: $transition
     @media (max-width: $width-mobile)
       &-total
         bottom: 12px
@@ -307,5 +308,12 @@ $paddingQuizMobile: 48px 16px 16px
           background-repeat: no-repeat
         @media (max-width: $width-mobile)
           width: 140px
+
+
+  &__step--form
+    max-width: 400px
+    margin: 0 auto
+    .form
+      padding-top: 0
 
 

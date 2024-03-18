@@ -1,11 +1,11 @@
 mixin button(title, type, addedClass_1 = "", addedClass_2 = "")
-    button.button(type="button" class = `button--${type} ${addedClass_1} ${addedClass_2}`)
+    button.button(class = `button--${type} ${addedClass_1} ${addedClass_2}`)
         i.button__hover
         span.button__text= title
 
 
 mixin button-link(link, title, type, addedClass_1 = "", addedClass_2 = "")
-    a.button(href=link type="button" class = `button--${type} ${addedClass_1} ${addedClass_2}`)
+    a.button(href=link class = `button--${type} ${addedClass_1} ${addedClass_2}`)
         i.button__hover
         span.button__text= title
 
@@ -34,11 +34,11 @@ mixin form(title, textBtn)
 
             +button(textBtn, "fill-dark", "form__submit")
 
-        p.form__agreement Нажимая на кнопку, вы даете согласие на обработку <br>
-            a(href="" download) персональных данных
+        p.form__agreement Нажимая на кнопку, вы даете согласие на обработку&ensp;
+            a(href="##" download) персональных&nbsp;данных
 
         .form__message.form__message--success
             p Спасибо! <br> Свяжемся с вами в течении 30 минут
         .form__message.form__message--error
             p Ошибка <br>
-                button(onclick='window.popup.close()') Попробуйте еще раз
+                button.close-dialog(type="button") Попробуйте еще раз

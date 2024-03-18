@@ -59,6 +59,10 @@ section
     transition: $transition
     border-radius: 32px
     transform: translateX(-100%)
+  &:hover .button__hover
+    transform: translateX(0)
+
+
 
   &.button--fill
     background-color: $creme
@@ -66,7 +70,6 @@ section
     &:hover
       color: #FFFFFF
     &:hover .button__hover
-      transform: translateX(0)
       background-color: #A2998E
 
   &.button--outline
@@ -77,17 +80,20 @@ section
       color: #24231F
       border-color: #FFFFFF
     &:hover .button__hover
-      transform: translateX(0)
       background-color: #FFFFFF
 
   &.button--fill-dark
     background-color: $bg
     color: #FFFFFF
-    border: 1px solid transparent
+    border: 1px solid $bg
     &:hover
+      border-color: #A2998E
+    &:hover .button__hover
       background-color: #A2998E
     &:disabled
       opacity: 0.6
+    &:disabled .button__hover
+      transform: translateX(100%)
 
 
 

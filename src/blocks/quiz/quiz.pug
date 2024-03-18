@@ -1,12 +1,12 @@
 dialog.quiz#quiz
 
-    button.quiz__close(onclick='window.quiz.close()')
+    button.quiz__close
         include ../../img/icons/close.svg
 
     .quiz__wrapper
 
         // --- Шаг 0 ---
-        .quiz__step.quiz__step-0.quiz-step-0.hidden
+        .quiz__step.quiz__step-0.quiz-step-0
             .quiz-step-1__img
                 img(src="./assets/img/quiz/01.jpg")
 
@@ -19,7 +19,7 @@ dialog.quiz#quiz
 
 
         // Список шагов с 1 по 5
-        .quiz__steps
+        .quiz__steps.hidden
 
             // --- QUIZ PROGRESS ---
             .quiz__progress
@@ -28,7 +28,7 @@ dialog.quiz#quiz
                     .quiz__progress-inner
 
             // --- Шаг 1 ---
-            .quiz__step.quiz__step-1.quiz-step-1.hidden
+            .quiz__step.quiz__step-1.quiz-step-1
                 .quiz-step-1__content
                     h3.quiz__step-title Тип помещения
 
@@ -93,7 +93,7 @@ dialog.quiz#quiz
             // --- Шаг 4 ---
             .quiz__step.quiz__step-4.quiz-step-4.hidden
                 .quiz-step-4__content
-                    h3.quiz__step-title Тип помещения
+                    h3.quiz__step-title В каком стиле вы хотите интерьер?
 
                     fieldset.quiz-step-4__fieldset
 
@@ -127,7 +127,7 @@ dialog.quiz#quiz
 
 
             // --- Шаг 5 ---
-            .quiz__step.quiz__step-5.quiz-step-5.hiddenn
+            .quiz__step.quiz__step-5.quiz-step-5.hidden
                 .quiz-step-5__content
                     h3.quiz__step-title Добавьте планировку
 
@@ -135,9 +135,10 @@ dialog.quiz#quiz
                         input(type="file" id="file")
                         label(for="file")
 
-
-
-
             // --- QUIZ FOOTER ---
             .quiz__steps-footer
                 +button("Далее", "fill-dark", "quiz__steps-next")
+
+
+        .quiz__step.quiz__step--form.hidden
+            +form("Рассчитаем стоимость проекта и отправим вам в мессенджер", "Получить рассчет")

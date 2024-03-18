@@ -1,4 +1,4 @@
-const handleModalClick = ({ currentTarget, target }) => {
-  const isClickedOnBackdrop = target === currentTarget;
-  isClickedOnBackdrop && currentTarget.close();
+const handleModalClick = (evt) => {
+  const isClickedOnBackdrop = evt.target === evt.currentTarget;
+  isClickedOnBackdrop && closingDialog (evt);
 }
