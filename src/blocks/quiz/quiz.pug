@@ -7,11 +7,11 @@ dialog.quiz#quiz
 
         // --- Шаг 0 ---
         .quiz__step.quiz__step-0.quiz-step-0
-            .quiz-step-1__img
+            .quiz-step-0__img
                 img(src="./assets/img/quiz/01.jpg")
 
             .quiz-step-0__content
-               h3.quiz__step-title Узнать стоимость <br> дизайна интерьера
+               h3.quiz__step-title.quiz-step-0__title Узнать стоимость <br> дизайна интерьера
                p.quiz-step-0__subtitle Пройдите тест из 5 шагов и получите расчет стоимости
 
                +button("Узнать стоимость", "fill-dark", "quiz-step-0__btn")
@@ -132,8 +132,9 @@ dialog.quiz#quiz
                     h3.quiz__step-title Добавьте планировку
 
                     .add-layout
-                        input(type="file" id="file")
+                        input(type="file" id="file" name="document")
                         label(for="file")
+                    .add-layout__data
 
             // --- QUIZ FOOTER ---
             .quiz__steps-footer

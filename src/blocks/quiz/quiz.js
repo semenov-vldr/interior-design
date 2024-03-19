@@ -85,21 +85,28 @@ if (quiz) {
     if (questionCount === quizSteps.length - 1) {
       quizStepsFooter.classList.add("hidden");
       quizProgress.classList.add("hidden");
-
-      const inputs = quiz.querySelectorAll("input");
-
-      const checkedRoomType = quiz.querySelector(".quiz__step-1 fieldset input[type='radio']:checked").value;
-      const checkedBudget = quiz.querySelector(".quiz__step-3 fieldset input[type='radio']:checked").value;
-      const checkedStyleRoom = quiz.querySelector(".quiz__step-4 fieldset input[type='radio']:checked").value;
-      console.log(checkedRoomType, areaField.value, checkedBudget, checkedStyleRoom)
-
-
-
+      quizStepList.classList.add("hidden");
     }
   }
 
   quizNextBtn.addEventListener('click', handlerQuizNextBtn);
 
+
+  // Add File
+  const addLayout = quiz.querySelector('.add-layout');
+  const inputFile = addLayout.querySelector('#file');
+  inputFile.addEventListener('change', function (e) {
+    // Get the selected file
+    const [file] = e.target.files;
+    // Get the file name and size
+    const { name: fileName, size } = file;
+    // Convert size in bytes to kilo bytes
+    const fileSize = (size / 1024 / 1024).toFixed(4);
+    // Set the text content
+    const fileNameAndSize = `${fileName} - ${fileSize}MB`;
+    quiz.querySelector('.add-layout__data').textContent = fileNameAndSize;
+    addLayout.classList.add("js-add-file");
+  });
 
 }
 

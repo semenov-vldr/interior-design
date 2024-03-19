@@ -4,10 +4,12 @@
   max-width: 800px
   background-color: #E8E5E2
   border-radius: 20px
-  overflow: auto
+  line-height: 1
+  height: 455px
   @media (max-width: $width-mobile)
     max-width: 500px
     width: calc(100% - 16px)
+    height: 400px
 
 
   &::backdrop,
@@ -33,15 +35,12 @@
         grid-template-columns: 1fr
 
   &__img
+    overflow: hidden
     @media (max-width: $width-mobile)
       display: none
     img
       width: 100%
       height: 100%
-      object-fit: cover
-
-  &__img
-    overflow: hidden
 
 
   &__message
