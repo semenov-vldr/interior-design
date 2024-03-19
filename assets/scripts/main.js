@@ -4,6 +4,7 @@
 var TOKEN = "6388509099:AAFIQyVlZ4MapEiXhH2vQJh8CyZFgFoJ_mA";
 var CHAT_ID = "-1002008090284";
 var URL_API = "https://api.telegram.org/bot".concat(TOKEN, "/sendMessage");
+var URL_API_DOC = "https://api.telegram.org/bot".concat(TOKEN, "/sendDocument");
 var forms = document.querySelectorAll("form.form");
 if (forms) {
   forms.forEach(function (form) {
@@ -12,7 +13,7 @@ if (forms) {
 }
 function sendMessageTelegram(evt) {
   evt.preventDefault();
-  var typeConnection = this.querySelector(".form__connection-fieldset  input[type='radio']:checked");
+  var typeConnection = this.querySelector(".form__connection-fieldset input[type='radio']:checked");
   var successFormMessage = this.querySelector('.form__message--success');
   var errorFormMessage = this.querySelector('.form__message--error');
   function formSuccess() {
@@ -25,6 +26,20 @@ function sendMessageTelegram(evt) {
   message += "<b>\u0418\u043C\u044F: ".concat(this.name.value, " </b>\n");
   message += "<b>\u0422\u0435\u043B\u0435\u0444\u043E\u043D: ".concat(this.tel.value, " </b>\n");
   message += "<b>\u0421\u043F\u043E\u0441\u043E\u0431 \u0441\u0432\u044F\u0437\u0438: ".concat(typeConnection.value, " </b>\n");
+
+  // Если форма в квизе
+  var quiz = this.closest("#quiz");
+  if (quiz) {
+    var areaField = quiz.querySelector(".quiz-step-2__range-field");
+    var checkedRoomType = quiz.querySelector(".quiz__step-1 fieldset input[type='radio']:checked");
+    var checkedBudget = quiz.querySelector(".quiz__step-3 fieldset input[type='radio']:checked");
+    var checkedStyleRoom = quiz.querySelector(".quiz__step-4 fieldset input[type='radio']:checked");
+    message += "<b>--------------------\u041A\u0432\u0438\u0437--------------------</b>\n";
+    checkedRoomType ? message += "<b>\u0422\u0438\u043F \u043F\u043E\u043C\u0435\u0449\u0435\u043D\u0438\u044F: ".concat(checkedRoomType.value, " </b>\n") : null;
+    areaField ? message += "<b>\u041F\u043B\u043E\u0449\u0430\u0434\u044C \u043F\u043E\u043C\u0435\u0449\u0435\u043D\u0438\u044F: ".concat(areaField.value, " </b>\n") : null;
+    checkedBudget ? message += "<b>\u0411\u044E\u0434\u0436\u0435\u0442: ".concat(checkedBudget.value, " </b>\n") : null;
+    checkedStyleRoom ? message += "<b>\u0421\u0442\u0438\u043B\u044C \u0438\u043D\u0442\u0435\u0440\u044C\u0435\u0440\u0430: ".concat(checkedStyleRoom.value, " </b>\n") : null;
+  }
   axios.post(URL_API, {
     chat_id: CHAT_ID,
     parse_mode: "html",
@@ -39,6 +54,26 @@ function sendMessageTelegram(evt) {
     console.log("Конец");
   });
   this.reset();
+
+  // Send Doc
+  var inputFile = quiz.querySelector(".add-layout input[type='file']").files[0];
+  if (inputFile) {
+    var formData = new FormData();
+    formData.append('chat_id', CHAT_ID);
+    formData.append('document', inputFile);
+    axios.post(URL_API_DOC, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(function () {
+      console.log("Документ отправлен");
+    })["catch"](function (err) {
+      console.warn(err);
+    })["finally"](function () {
+      console.log("Конец");
+    });
+    this.reset();
+  }
 }
 ;
 "use strict";
@@ -396,6 +431,12 @@ AOS.init({
 });
 "use strict";
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var quiz = document.getElementById("quiz");
 if (quiz) {
   // Показ активного шага квиза
@@ -417,11 +458,7 @@ if (quiz) {
     if (questionCount === quizSteps.length - 1) {
       quizStepsFooter.classList.add("hidden");
       quizProgress.classList.add("hidden");
-      var inputs = quiz.querySelectorAll("input");
-      var checkedRoomType = quiz.querySelector(".quiz__step-1 fieldset input[type='radio']:checked").value;
-      var checkedBudget = quiz.querySelector(".quiz__step-3 fieldset input[type='radio']:checked").value;
-      var checkedStyleRoom = quiz.querySelector(".quiz__step-4 fieldset input[type='radio']:checked").value;
-      console.log(checkedRoomType, areaField.value, checkedBudget, checkedStyleRoom);
+      quizStepList.classList.add("hidden");
     }
   };
   // Кнопки с классом, которые открывают Квиз
@@ -478,6 +515,24 @@ if (quiz) {
   var learnMoreBtn = quiz.querySelector(".quiz-step-0__btn");
   learnMoreBtn.addEventListener('click', handlerLearnMoreBtn);
   quizNextBtn.addEventListener('click', handlerQuizNextBtn);
+
+  // Add File
+  var addLayout = quiz.querySelector('.add-layout');
+  var inputFile = addLayout.querySelector('#file');
+  inputFile.addEventListener('change', function (e) {
+    // Get the selected file
+    var _e$target$files = _slicedToArray(e.target.files, 1),
+      file = _e$target$files[0];
+    // Get the file name and size
+    var fileName = file.name,
+      size = file.size;
+    // Convert size in bytes to kilo bytes
+    var fileSize = (size / 1024 / 1024).toFixed(4);
+    // Set the text content
+    var fileNameAndSize = "".concat(fileName, " - ").concat(fileSize, "MB");
+    quiz.querySelector('.add-layout__data').textContent = fileNameAndSize;
+    addLayout.classList.add("js-add-file");
+  });
 }
 "use strict";
 
