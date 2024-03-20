@@ -253,6 +253,30 @@ if (about) {
 }
 "use strict";
 
+var cursor = document.querySelector('.cursor');
+if (cursor) {
+  var onMouseMove = function onMouseMove(e) {
+    gsap.to($bigBall, .4, {
+      x: e.pageX - 12,
+      y: e.pageY - 12
+    });
+    gsap.to($smallBall, .1, {
+      x: e.pageX - 5,
+      y: e.pageY - 8
+    });
+    var footer = document.querySelector("#footer");
+    if (footer && e.pageY > document.documentElement.scrollHeight - footer.offsetHeight) {
+      cursor.classList.add("hover-footer");
+    } else {
+      cursor.classList.remove("hover-footer");
+    }
+  };
+  var $bigBall = document.querySelector('.cursor__ball--big');
+  var $smallBall = document.querySelector('.cursor__ball--small');
+  document.body.addEventListener('mousemove', onMouseMove);
+}
+"use strict";
+
 var faq = document.getElementById("faq");
 if (faq) {
   var accordionItems = faq.querySelectorAll('.faq__item'); // список элементов аккордиона
