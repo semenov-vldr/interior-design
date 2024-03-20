@@ -1,14 +1,21 @@
 body
-  cursor: none
+  //cursor: none
+
+dialog
+  cursor: auto
 
 .cursor
   pointer-events: none
+  @media (max-width: $width-tablet)
+    display: none
 
   &__ball
     position: absolute
     top: 0
     left: 0
     z-index: 1000
+    circle
+      transition: fill 0.3s
 
   &__ball--big circle
     fill: $creme

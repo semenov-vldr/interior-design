@@ -16,8 +16,12 @@ function sendMessageTelegram (evt) {
   const successFormMessage = this.querySelector('.form__message--success');
   const errorFormMessage = this.querySelector('.form__message--error');
 
+  const quiz = this.closest("#quiz");
+
   function formSuccess () {
     successFormMessage.classList.add('js-message-active');
+
+    if (quiz) resetQuiz()
   }
 
   function formError () {
@@ -32,7 +36,7 @@ function sendMessageTelegram (evt) {
 
 
   // Если форма в квизе
-  const quiz = this.closest("#quiz");
+
 
   if (quiz) {
     const areaField = quiz.querySelector(".quiz-step-2__range-field");
@@ -45,6 +49,37 @@ function sendMessageTelegram (evt) {
       areaField ? message += `<b>Площадь помещения: ${areaField.value} </b>\n` : null;
       checkedBudget ? message += `<b>Бюджет: ${checkedBudget.value} </b>\n` : null;
       checkedStyleRoom ? message += `<b>Стиль интерьера: ${checkedStyleRoom.value} </b>\n` : null;
+  }
+
+
+  function resetQuiz () {
+    const quizSteps = quiz.querySelectorAll(".quiz__step");
+    const step_0 = quiz.querySelector(".quiz__step.quiz__step-0");
+    const step_1 = quiz.querySelector(".quiz__step.quiz__step-1");
+    const quizStepList = quiz.querySelector(".quiz__steps");
+    const quizStepsFooter = quiz.querySelector(".quiz__steps-footer");
+    const quizProgress = quiz.querySelector(".quiz__progress");
+    const quizProgressInner = quizProgress.querySelector(".quiz__progress-inner");
+    const quizProgressTotal = quizProgress.querySelector(".quiz__progress-total");
+    const quizStepForm = quiz.querySelector(".quiz__step--form");
+
+    const inputs = quiz.querySelectorAll("input");
+    inputs.forEach(input => input.reset());
+
+
+    quizSteps.forEach(step => step.classList.add("hidden"));
+
+    step_0.classList.remove('hidden');
+    step_1.classList.remove('hidden');
+    quizStepList.classList.add('hidden');
+    quizStepsFooter.classList.remove('hidden');
+    quizStepForm.classList.add('hidden');
+    quizProgress.classList.remove('hidden');
+
+
+    quizProgressTotal.textContent = `1/5`
+    quizProgressInner.style.width = `20%`
+
   }
 
 
