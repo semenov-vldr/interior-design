@@ -1,0 +1,26 @@
+body
+  cursor: none
+
+.cursor
+  pointer-events: none
+
+  &__ball
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 1000
+
+  &__ball--big circle
+    fill: $creme
+
+  &__ball--small circle
+    fill: #21201D
+
+  &.hover-footer
+
+    .cursor__ball--big circle
+      fill: #21201D
+      //fill: #C67E38
+    .cursor__ball--small circle
+      //fill: $creme
+      fill: #AEADAB
