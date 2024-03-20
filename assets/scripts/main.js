@@ -16,8 +16,10 @@ function sendMessageTelegram(evt) {
   var typeConnection = this.querySelector(".form__connection-fieldset input[type='radio']:checked");
   var successFormMessage = this.querySelector('.form__message--success');
   var errorFormMessage = this.querySelector('.form__message--error');
+  var quiz = this.closest("#quiz");
   function formSuccess() {
     successFormMessage.classList.add('js-message-active');
+    if (quiz) resetQuiz();
   }
   function formError() {
     errorFormMessage.classList.add('js-message-active');
@@ -28,7 +30,7 @@ function sendMessageTelegram(evt) {
   message += "<b>\u0421\u043F\u043E\u0441\u043E\u0431 \u0441\u0432\u044F\u0437\u0438: ".concat(typeConnection.value, " </b>\n");
 
   // Если форма в квизе
-  var quiz = this.closest("#quiz");
+
   if (quiz) {
     var areaField = quiz.querySelector(".quiz-step-2__range-field");
     var checkedRoomType = quiz.querySelector(".quiz__step-1 fieldset input[type='radio']:checked");
@@ -39,6 +41,32 @@ function sendMessageTelegram(evt) {
     areaField ? message += "<b>\u041F\u043B\u043E\u0449\u0430\u0434\u044C \u043F\u043E\u043C\u0435\u0449\u0435\u043D\u0438\u044F: ".concat(areaField.value, " </b>\n") : null;
     checkedBudget ? message += "<b>\u0411\u044E\u0434\u0436\u0435\u0442: ".concat(checkedBudget.value, " </b>\n") : null;
     checkedStyleRoom ? message += "<b>\u0421\u0442\u0438\u043B\u044C \u0438\u043D\u0442\u0435\u0440\u044C\u0435\u0440\u0430: ".concat(checkedStyleRoom.value, " </b>\n") : null;
+  }
+  function resetQuiz() {
+    var quizSteps = quiz.querySelectorAll(".quiz__step");
+    var step_0 = quiz.querySelector(".quiz__step.quiz__step-0");
+    var step_1 = quiz.querySelector(".quiz__step.quiz__step-1");
+    var quizStepList = quiz.querySelector(".quiz__steps");
+    var quizStepsFooter = quiz.querySelector(".quiz__steps-footer");
+    var quizProgress = quiz.querySelector(".quiz__progress");
+    var quizProgressInner = quizProgress.querySelector(".quiz__progress-inner");
+    var quizProgressTotal = quizProgress.querySelector(".quiz__progress-total");
+    var quizStepForm = quiz.querySelector(".quiz__step--form");
+    var inputs = quiz.querySelectorAll("input");
+    inputs.forEach(function (input) {
+      return input.reset();
+    });
+    quizSteps.forEach(function (step) {
+      return step.classList.add("hidden");
+    });
+    step_0.classList.remove('hidden');
+    step_1.classList.remove('hidden');
+    quizStepList.classList.add('hidden');
+    quizStepsFooter.classList.remove('hidden');
+    quizStepForm.classList.add('hidden');
+    quizProgress.classList.remove('hidden');
+    quizProgressTotal.textContent = "1/5";
+    quizProgressInner.style.width = "20%";
   }
   axios.post(URL_API, {
     chat_id: CHAT_ID,
@@ -255,6 +283,7 @@ if (about) {
 
 var cursor = document.querySelector('.cursor');
 if (cursor) {
+  //document.body.addEventListener('mousemove', onMouseMove);
   var onMouseMove = function onMouseMove(e) {
     gsap.to($bigBall, .4, {
       x: e.pageX - 12,
@@ -265,15 +294,11 @@ if (cursor) {
       y: e.pageY - 8
     });
     var footer = document.querySelector("#footer");
-    if (footer && e.pageY > document.documentElement.scrollHeight - footer.offsetHeight) {
-      cursor.classList.add("hover-footer");
-    } else {
-      cursor.classList.remove("hover-footer");
-    }
+    var isFooterHover = e.pageY > document.documentElement.scrollHeight - footer.offsetHeight;
+    //footer && cursor.classList.toggle("hover-footer", isFooterHover);
   };
   var $bigBall = document.querySelector('.cursor__ball--big');
   var $smallBall = document.querySelector('.cursor__ball--small');
-  document.body.addEventListener('mousemove', onMouseMove);
 }
 "use strict";
 
