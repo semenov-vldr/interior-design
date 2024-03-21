@@ -283,7 +283,6 @@ if (about) {
 
 var cursor = document.querySelector('.cursor');
 if (cursor) {
-  //document.body.addEventListener('mousemove', onMouseMove);
   var onMouseMove = function onMouseMove(e) {
     gsap.to($bigBall, .4, {
       x: e.pageX - 12,
@@ -295,10 +294,11 @@ if (cursor) {
     });
     var footer = document.querySelector("#footer");
     var isFooterHover = e.pageY > document.documentElement.scrollHeight - footer.offsetHeight;
-    //footer && cursor.classList.toggle("hover-footer", isFooterHover);
+    footer && cursor.classList.toggle("hover-footer", isFooterHover);
   };
   var $bigBall = document.querySelector('.cursor__ball--big');
   var $smallBall = document.querySelector('.cursor__ball--small');
+  document.body.addEventListener('mousemove', onMouseMove);
 }
 "use strict";
 
@@ -509,6 +509,7 @@ if (quiz) {
       quizProgress.classList.add("hidden");
       quizStepList.classList.add("hidden");
     }
+    if (questionCount === 2) stepNextBtn.disabled = true;
   };
   // Кнопки с классом, которые открывают Квиз
   var btnQuizOpenList = document.querySelectorAll(".js-quiz-open");
@@ -526,10 +527,12 @@ if (quiz) {
   closeQuiz.addEventListener("click", closingDialog);
 
   // --- Range Price ---
+  var step_2 = quiz.querySelector(".quiz__step.quiz__step-2");
   var rangeArea = quiz.querySelector(".quiz-step-2__range-slider");
   var areaField = quiz.querySelector(".quiz-step-2__range-field");
   var minValue = quiz.querySelector(".quiz-step-2__range-min");
   var maxValue = quiz.querySelector(".quiz-step-2__range-max");
+  var stepNextBtn = quiz.querySelector(".quiz__steps-footer .quiz__steps-next");
   var areaMin = +areaField.dataset.min;
   var areaMax = +areaField.dataset.max;
   minValue.textContent = areaMin;
@@ -537,7 +540,7 @@ if (quiz) {
   noUiSlider.create(rangeArea, {
     start: [areaMin],
     connect: "lower",
-    step: 10,
+    step: 1,
     range: {
       'min': areaMin,
       'max': areaMax
@@ -547,6 +550,11 @@ if (quiz) {
   // при изменений положения элементов управления слайдера изменяем соответствующие значения
   rangeArea.noUiSlider.on('update', function (values, handle) {
     areaField.value = "".concat(parseInt(values[handle]), " \u043C\xB2");
+    stepNextBtn.disabled = false;
+
+    // if (areaField.value === "0 м²") {
+    //   stepNextBtn.disabled = true;
+    // }
   });
 
   // --- Переключение шагов квиза ---
