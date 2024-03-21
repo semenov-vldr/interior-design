@@ -4,7 +4,7 @@ if (cursor) {
   const $bigBall = document.querySelector('.cursor__ball--big');
   const $smallBall = document.querySelector('.cursor__ball--small');
 
-  //document.body.addEventListener('mousemove', onMouseMove);
+  document.body.addEventListener('mousemove', onMouseMove);
 
   function onMouseMove(e) {
     gsap.to($bigBall, .4, {
@@ -19,7 +19,7 @@ if (cursor) {
 
     const footer = document.querySelector("#footer");
     const isFooterHover = e.pageY > document.documentElement.scrollHeight - footer.offsetHeight;
-    //footer && cursor.classList.toggle("hover-footer", isFooterHover);
+    footer && cursor.classList.toggle("hover-footer", isFooterHover);
 
   }
 

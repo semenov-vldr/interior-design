@@ -36,10 +36,13 @@
       object-fit: cover
       margin: 0 auto
       box-shadow: rgba(#1A1A1A, 0.3) 0 4px 16px
+      transition: $transition
       @media (max-width: $width-mobile)
         aspect-ratio: 1.4 / 1
       @media (max-width: 480px)
         aspect-ratio: 1 / 1
+    &:hover img
+      filter: brightness(85%)
 
     &:nth-child(1)
       grid-column: 1 / 6

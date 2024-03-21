@@ -19,10 +19,13 @@ if (quiz) {
   closeQuiz.addEventListener("click", closingDialog);
 
   // --- Range Price ---
+  const step_2 = quiz.querySelector(".quiz__step.quiz__step-2");
   const rangeArea = quiz.querySelector(".quiz-step-2__range-slider");
   const areaField = quiz.querySelector(".quiz-step-2__range-field");
   const minValue = quiz.querySelector(".quiz-step-2__range-min");
   const maxValue = quiz.querySelector(".quiz-step-2__range-max");
+  const stepNextBtn = quiz.querySelector(".quiz__steps-footer .quiz__steps-next");
+
   const areaMin = +areaField.dataset.min;
   const areaMax = +areaField.dataset.max;
   minValue.textContent = areaMin;
@@ -32,7 +35,7 @@ if (quiz) {
   noUiSlider.create(rangeArea, {
     start: [areaMin],
     connect: "lower",
-    step: 10,
+    step: 1,
     range: {
       'min': areaMin,
       'max': areaMax,
@@ -42,7 +45,13 @@ if (quiz) {
   // при изменений положения элементов управления слайдера изменяем соответствующие значения
   rangeArea.noUiSlider.on('update', function (values, handle) {
     areaField.value = `${parseInt(values[handle])} м²`;
+    stepNextBtn.disabled = false;
+
+    // if (areaField.value === "0 м²") {
+    //   stepNextBtn.disabled = true;
+    // }
   });
+
 
 
   // --- Переключение шагов квиза ---
@@ -87,6 +96,8 @@ if (quiz) {
       quizProgress.classList.add("hidden");
       quizStepList.classList.add("hidden");
     }
+
+    if (questionCount === 2) stepNextBtn.disabled = true;
   }
 
   quizNextBtn.addEventListener('click', handlerQuizNextBtn);

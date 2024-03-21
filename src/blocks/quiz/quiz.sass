@@ -83,6 +83,8 @@ $paddingQuizMobile: 48px 16px 16px
     margin-top: auto
     display: flex
     justify-content: center
+    .quiz__steps-next:disabled
+      opacity: 0.5
     @media (max-width: $width-mobile)
       .quiz__steps-next
         width: 100%
@@ -110,6 +112,7 @@ $paddingQuizMobile: 48px 16px 16px
   &__step
     height: 100%
     margin-bottom: 24px
+    @extend .flex-center
 
 
   // --- Шаг 1 ---
@@ -348,7 +351,5 @@ $paddingQuizMobile: 48px 16px 16px
   &__step--form
     max-width: 400px
     margin: 0 auto
-    //.form
-    //  padding-top: 0
 
 
