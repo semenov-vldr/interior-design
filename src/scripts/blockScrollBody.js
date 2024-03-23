@@ -1,7 +1,7 @@
 
 const html = document.querySelector('html');
 
-const classBlockScroll = "js-block-scroll";
+const classBlockScroll = "js-no-scroll";
 
 function blockScrollBody () {
   if ( !html.classList.contains(classBlockScroll) ) {

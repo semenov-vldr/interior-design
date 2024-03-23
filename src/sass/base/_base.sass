@@ -6,6 +6,17 @@ html
   font-variant-numeric: lining-nums
   &.js-no-scroll
     overflow-y: hidden
+  @media (max-width: 900px)
+    position: relative
+    &.js-no-scroll::after
+      content: ""
+      position: absolute
+      width: 100%
+      height: 100%
+      background-color: rgba(#000, 0.5)
+      left: 0
+      top: 0
+
 
 body
   overflow: clip
@@ -27,5 +38,3 @@ main.main
   @media (max-width: $width-mobile)
     gap: 80px
     padding-bottom: 80px
-
-

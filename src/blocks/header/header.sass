@@ -13,6 +13,7 @@
   &.js-scroll
     background-color: $bg
 
+
   &__container
     display: flex
     align-items: center
@@ -50,7 +51,6 @@
       transform: rotate(360deg)
 
 
-
   &-nav
     @media (max-width: 900px)
       top: 0
@@ -60,18 +60,19 @@
       background-color: $bg
       transform: translateY(-100%)
       opacity: 0
+      visibility: hidden
       transition: $transition
       padding: 76px 16px 32px 16px
       &.js-mobile-nav-open
         transform: translateY(0)
         opacity: 1
+        visibility: visible
       &.js-mobile-nav-open ~ .header__burger .header__burger-line-1
         transform: rotate(45deg)
       &.js-mobile-nav-open ~ .header__burger .header__burger-line-2
         transform: scale(0)
       &.js-mobile-nav-open ~ .header__burger .header__burger-line-3
         transform: rotate(-45deg)
-
 
     &__list
       display: flex
@@ -126,5 +127,3 @@
       &-line-3
         transform-origin: 0 100%
         transition: transform 0.4s ease-in-out
-
-
