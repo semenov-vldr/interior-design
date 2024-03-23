@@ -107,7 +107,7 @@ function sendMessageTelegram(evt) {
 "use strict";
 
 var html = document.querySelector('html');
-var classBlockScroll = "js-block-scroll";
+var classBlockScroll = "js-no-scroll";
 function blockScrollBody() {
   if (!html.classList.contains(classBlockScroll)) {
     html.classList.add(classBlockScroll);
@@ -379,15 +379,31 @@ function mobileNav() {
   if (!header) return;
   var nav = header.querySelector(".header__nav");
   var burger = header.querySelector(".header__burger");
+  var navLinks = nav.querySelectorAll(".header-nav__link");
+  function closeMenu() {
+    nav.classList.remove("js-mobile-nav-open");
+    unblockScrollBody();
+  }
+  ;
 
   // Открытие мобильного меню Бургер
   burger.addEventListener("click", function () {
     nav.classList.toggle("js-mobile-nav-open");
-    document.querySelector('html').classList.toggle('js-no-scroll');
+    toggleBlockScrollBody();
+
+    // Скрытие меню по клику вне блока
+    if (nav.classList.contains("js-mobile-nav-open")) {
+      document.addEventListener("click", function (evt) {
+        if (!evt.target.closest(".header")) closeMenu();
+      });
+    }
   });
   window.onscroll = function () {
     header.classList.toggle('js-scroll', window.scrollY > 1);
   };
+  navLinks.forEach(function (navLink) {
+    navLink.addEventListener("click", closeMenu);
+  });
 }
 mobileNav();
 "use strict";
