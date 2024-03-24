@@ -85,7 +85,7 @@ gulp.task("style:libs:dev", function () {
 // Images
 gulp.task("images:dev", function () {
   return gulp
-    .src("./src/img/**/*.{png,svg,jpg,jpeg,gif,webp}")
+    .src("./src/img/**/*.{png,svg,jpg,jpeg,gif,webp,ico}")
     .pipe(changed("./build/img/"))
     // .pipe(imagemin({ verbose: true } ))
     .pipe(gulp.dest("./build/assets/img/"))
