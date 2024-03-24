@@ -19,10 +19,15 @@ function sendMessageTelegram(evt) {
   var quiz = this.closest("#quiz");
   function formSuccess() {
     successFormMessage.classList.add('js-message-active');
-    if (quiz) resetQuiz();
+    quiz && setTimeout(function () {
+      return location.reload();
+    }, 3000);
   }
   function formError() {
     errorFormMessage.classList.add('js-message-active');
+    quiz && setTimeout(function () {
+      return location.reload();
+    }, 3000);
   }
   var message = "<b>\u0417\u0430\u044F\u0432\u043A\u0430 \u0414\u0438\u0437\u0430\u0439\u043D \u0418\u043D\u0442\u0435\u0440\u044C\u0435\u0440\u0430</b>\n";
   message += "<b>\u0418\u043C\u044F: ".concat(this.name.value, " </b>\n");
@@ -30,43 +35,16 @@ function sendMessageTelegram(evt) {
   message += "<b>\u0421\u043F\u043E\u0441\u043E\u0431 \u0441\u0432\u044F\u0437\u0438: ".concat(typeConnection.value, " </b>\n");
 
   // Если форма в квизе
-
   if (quiz) {
     var areaField = quiz.querySelector(".quiz-step-2__range-field");
     var checkedRoomType = quiz.querySelector(".quiz__step-1 fieldset input[type='radio']:checked");
     var checkedBudget = quiz.querySelector(".quiz__step-3 fieldset input[type='radio']:checked");
     var checkedStyleRoom = quiz.querySelector(".quiz__step-4 fieldset input[type='radio']:checked");
-    message += "<b>--------------------\u041A\u0432\u0438\u0437--------------------</b>\n";
+    message += "<b>----------</b>\n";
     checkedRoomType ? message += "<b>\u0422\u0438\u043F \u043F\u043E\u043C\u0435\u0449\u0435\u043D\u0438\u044F: ".concat(checkedRoomType.value, " </b>\n") : null;
     areaField ? message += "<b>\u041F\u043B\u043E\u0449\u0430\u0434\u044C \u043F\u043E\u043C\u0435\u0449\u0435\u043D\u0438\u044F: ".concat(areaField.value, " </b>\n") : null;
     checkedBudget ? message += "<b>\u0411\u044E\u0434\u0436\u0435\u0442: ".concat(checkedBudget.value, " </b>\n") : null;
     checkedStyleRoom ? message += "<b>\u0421\u0442\u0438\u043B\u044C \u0438\u043D\u0442\u0435\u0440\u044C\u0435\u0440\u0430: ".concat(checkedStyleRoom.value, " </b>\n") : null;
-  }
-  function resetQuiz() {
-    var quizSteps = quiz.querySelectorAll(".quiz__step");
-    var step_0 = quiz.querySelector(".quiz__step.quiz__step-0");
-    var step_1 = quiz.querySelector(".quiz__step.quiz__step-1");
-    var quizStepList = quiz.querySelector(".quiz__steps");
-    var quizStepsFooter = quiz.querySelector(".quiz__steps-footer");
-    var quizProgress = quiz.querySelector(".quiz__progress");
-    var quizProgressInner = quizProgress.querySelector(".quiz__progress-inner");
-    var quizProgressTotal = quizProgress.querySelector(".quiz__progress-total");
-    var quizStepForm = quiz.querySelector(".quiz__step--form");
-    var inputs = quiz.querySelectorAll("input");
-    inputs.forEach(function (input) {
-      return input.reset();
-    });
-    quizSteps.forEach(function (step) {
-      return step.classList.add("hidden");
-    });
-    step_0.classList.remove('hidden');
-    step_1.classList.remove('hidden');
-    quizStepList.classList.add('hidden');
-    quizStepsFooter.classList.remove('hidden');
-    quizStepForm.classList.add('hidden');
-    quizProgress.classList.remove('hidden');
-    quizProgressTotal.textContent = "1/5";
-    quizProgressInner.style.width = "20%";
   }
   axios.post(URL_API, {
     chat_id: CHAT_ID,
@@ -139,18 +117,32 @@ function closingDialog(_ref) {
   });
   dialog.close();
   form.reset();
-  if (dialog.classList.contains("quiz")) {
-    var inputs = dialog.querySelectorAll('input');
-    inputs.forEach(function (input) {
-      return input.value = "";
-    });
-  }
-}
-var closeDialogBtns = document.querySelectorAll(".close-dialog");
-if (closeDialogBtns) {
-  closeDialogBtns.forEach(function (closeBtn) {
-    closeBtn.addEventListener("click", closingDialog);
-  });
+
+  // if ( dialog.classList.contains("quiz") ) {
+  //   const inputs = dialog.querySelectorAll('input');
+  //   inputs.forEach(input => {
+  //     input.value = "";
+  //     input.checked = false;
+  //   });
+  //
+  //   const quizStepList = dialog.querySelector(".quiz__steps");
+  //   const quizStep_0_5 = dialog.querySelectorAll('.quiz__step');
+  //   const quizStepForm = dialog.querySelector('.quiz__step--form');
+  //   const quizStepsFooter = dialog.querySelector(".quiz__steps-footer");
+  //   const quizProgress = dialog.querySelector(".quiz__progress");
+  //   quizStep_0_5[0].classList.remove("hidden");
+  //   quizStep_0_5[1].classList.remove("hidden");
+  //   quizStepsFooter.classList.remove("hidden");
+  //   quizProgress.classList.remove("hidden");
+  //
+  //   [ quizStep_0_5[2],
+  //     quizStep_0_5[3],
+  //     quizStep_0_5[4],
+  //     quizStep_0_5[5],
+  //     quizStepForm,
+  //     quizStepList
+  //   ].forEach(step => step.classList.add("hidden"));
+  // }
 }
 "use strict";
 
@@ -255,16 +247,14 @@ if (about) {
 }
 "use strict";
 
-// Add your text here
-var text = "Более 6 лет создаем интерьер передающий черты его владельца, учитывая образ жизни, увлечения и пожелания всех членов семьи, красивая и удобная обстановка в доме положительно сказывается на настроении, здоровье и финансовом успехе";
 var about = document.getElementById("about");
 if (about) {
   gsap.registerPlugin(ScrollTrigger);
   var parentElement = document.getElementById('paragraph');
-  var words = text.split(' ');
+  var words = parentElement.textContent.split(' ');
+  parentElement.textContent = "";
   words.forEach(function (word) {
     var span = document.createElement('span');
-    // span.style.opacity = 0.2;
     span.textContent = word + ' ';
     parentElement.appendChild(span);
   });
@@ -527,6 +517,9 @@ if (quiz) {
     }
     if (questionCount === 2) stepNextBtn.disabled = true;
   };
+  // Счетчик шагов
+  var questionCount = 1;
+
   // Кнопки с классом, которые открывают Квиз
   var btnQuizOpenList = document.querySelectorAll(".js-quiz-open");
   btnQuizOpenList.forEach(function (btnQuizOpen) {
@@ -540,7 +533,13 @@ if (quiz) {
 
   // Закрытие квиза
   var closeQuiz = quiz.querySelector(".quiz__close");
-  closeQuiz.addEventListener("click", closingDialog);
+  closeQuiz.addEventListener("click", function (evt) {
+    closingDialog(evt);
+    //questionCount = 1;
+    //
+    // const rangeArea = quiz.querySelector(".quiz-step-2__range-slider");
+    // rangeArea.noUiSlider.reset();
+  });
 
   // --- Range Price ---
   var step_2 = quiz.querySelector(".quiz__step.quiz__step-2");
@@ -556,7 +555,7 @@ if (quiz) {
   noUiSlider.create(rangeArea, {
     start: [areaMin],
     connect: "lower",
-    step: 1,
+    step: 5,
     range: {
       'min': areaMin,
       'max': areaMax
@@ -567,14 +566,9 @@ if (quiz) {
   rangeArea.noUiSlider.on('update', function (values, handle) {
     areaField.value = "".concat(parseInt(values[handle]), " \u043C\xB2");
     stepNextBtn.disabled = false;
-
-    // if (areaField.value === "0 м²") {
-    //   stepNextBtn.disabled = true;
-    // }
   });
 
   // --- Переключение шагов квиза ---
-
   var quizSteps = quiz.querySelectorAll(".quiz__step");
   var quizNextBtn = quiz.querySelector(".quiz__steps-next");
   var step_0 = quiz.querySelector(".quiz__step.quiz__step-0");
@@ -583,7 +577,6 @@ if (quiz) {
   var quizProgress = quiz.querySelector(".quiz__progress");
   var quizProgressInner = quizProgress.querySelector(".quiz__progress-inner");
   var quizProgressTotal = quizProgress.querySelector(".quiz__progress-total");
-  var questionCount = 1;
   ;
   var learnMoreBtn = quiz.querySelector(".quiz-step-0__btn");
   learnMoreBtn.addEventListener('click', handlerLearnMoreBtn);
