@@ -2,6 +2,9 @@ const quiz = document.getElementById("quiz");
 
 if (quiz) {
 
+  // Счетчик шагов
+  let questionCount = 1;
+
   // Кнопки с классом, которые открывают Квиз
   const btnQuizOpenList = document.querySelectorAll(".js-quiz-open");
 
@@ -16,7 +19,14 @@ if (quiz) {
 
   // Закрытие квиза
   const closeQuiz = quiz.querySelector(".quiz__close");
-  closeQuiz.addEventListener("click", closingDialog);
+  closeQuiz.addEventListener("click", (evt) => {
+    closingDialog(evt);
+    //questionCount = 1;
+    //
+    // const rangeArea = quiz.querySelector(".quiz-step-2__range-slider");
+    // rangeArea.noUiSlider.reset();
+
+  });
 
   // --- Range Price ---
   const step_2 = quiz.querySelector(".quiz__step.quiz__step-2");
@@ -35,7 +45,7 @@ if (quiz) {
   noUiSlider.create(rangeArea, {
     start: [areaMin],
     connect: "lower",
-    step: 1,
+    step: 5,
     range: {
       'min': areaMin,
       'max': areaMax,
@@ -46,16 +56,10 @@ if (quiz) {
   rangeArea.noUiSlider.on('update', function (values, handle) {
     areaField.value = `${parseInt(values[handle])} м²`;
     stepNextBtn.disabled = false;
-
-    // if (areaField.value === "0 м²") {
-    //   stepNextBtn.disabled = true;
-    // }
   });
 
 
-
   // --- Переключение шагов квиза ---
-
   const quizSteps = quiz.querySelectorAll(".quiz__step");
   const quizNextBtn = quiz.querySelector(".quiz__steps-next");
   const step_0 = quiz.querySelector(".quiz__step.quiz__step-0");
@@ -64,8 +68,6 @@ if (quiz) {
   const quizProgress = quiz.querySelector(".quiz__progress");
   const quizProgressInner = quizProgress.querySelector(".quiz__progress-inner");
   const quizProgressTotal = quizProgress.querySelector(".quiz__progress-total");
-
-  let questionCount = 1;
 
   // Показ активного шага квиза
   function quizDisplay (questionCount) {
@@ -87,8 +89,8 @@ if (quiz) {
     questionCount ++;
     quizDisplay (questionCount);
 
-    quizProgressTotal.textContent = `${questionCount}/${quizSteps.length - 2}`
-    quizProgressInner.style.width = `${100 / (quizSteps.length - 2) * questionCount}%`
+    quizProgressTotal.textContent = `${questionCount}/${quizSteps.length - 2}`;
+    quizProgressInner.style.width = `${100 / (quizSteps.length - 2) * questionCount}%`;
 
 
     if (questionCount === quizSteps.length - 1) {
