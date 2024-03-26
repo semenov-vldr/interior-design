@@ -153,6 +153,14 @@ var handleModalClick = function handleModalClick(evt) {
 "use strict";
 "use strict";
 
+var images = document.querySelectorAll("img");
+if (images) {
+  images.forEach(function (img) {
+    return img.setAttribute("loading", "lazy");
+  });
+}
+"use strict";
+
 var phoneInputs = document.querySelectorAll('input[data-tel-input]');
 var getInputNumbersValue = function getInputNumbersValue(input) {
   return input.value.replace(/\D/g, "");
@@ -316,18 +324,6 @@ function margin() {
 }
 margin();
 window.addEventListener('resize', margin);
-"use strict";
-
-var formList = document.querySelectorAll("form.form");
-var maskOptions = {
-  mask: '+{7} (000) 000-00-00'
-};
-if (formList) {
-  formList.forEach(function (form) {
-    var inputTel = form.querySelector('input[type=tel]');
-    var mask = IMask(inputTel, maskOptions);
-  });
-}
 "use strict";
 
 var cardsContainer = document.querySelector('.guarantees__list');
