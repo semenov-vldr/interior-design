@@ -15,7 +15,7 @@ mixin form(title, textBtn)
         h3.form__title= title
         .form__body
             input.form__input(placeholder='Введите имя', name="name" maxlength="20" autocomplete='off' required )
-            input.form__input(type="tel" name="tel" placeholder='Введите номер' autocomplete='off' required)
+            input.form__input(type="tel" name="tel" placeholder='Введите номер' autocomplete='off' data-tel-input required)
 
             .form__connection
                 h3.form__connection-title Удобный способ связи

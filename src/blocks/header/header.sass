@@ -10,6 +10,9 @@
   @media (max-width: 900px)
     min-height: 56px
     padding: 10px 0
+  @media (max-width: 360px)
+    min-height: 44px
+
   &.js-scroll
     background-color: $bg
 
@@ -29,6 +32,8 @@
     align-items: center
     @media (max-width: 900px)
       flex: 0 0 56px
+    @media (max-width: 360px)
+      flex: 0 0 44px
 
   &__logo svg
     width: 64px
@@ -37,6 +42,9 @@
     @media (max-width: 900px)
       width: 56px
       height: 56px
+    @media (max-width: 360px)
+      width: 44px
+      height: 44px
 
 
   &__logo svg .text
@@ -63,6 +71,8 @@
       visibility: hidden
       transition: $transition
       padding: 76px 16px 32px 16px
+      @media (max-width: 360px)
+        padding-top: 56px
       &.js-mobile-nav-open
         transform: translateY(0)
         opacity: 1
@@ -83,12 +93,16 @@
       @media (max-width: 900px)
         gap: 24px
         flex-direction: column
+      @media (max-width: 360px)
+        gap: 16px
 
     &__item
       @media (max-width: 900px)
         border-bottom: 1px solid currentColor
         width: 100%
         padding-bottom: 16px
+      @media (max-width: 360px)
+        padding-bottom: 8px
 
     &__link
       white-space: nowrap
@@ -98,6 +112,8 @@
       @media (max-width: 900px)
         font-size: 20px
         font-weight: 400
+      @media (max-width: 360px)
+        font-size: 14px
       &:hover
         color: #E8B685
 
